@@ -326,111 +326,162 @@ function initializeProjectsFilter() {
 const projectsData = [
     {
         id: 1,
+        title: 'Clothigo- A Clothing Website for Online and POS system',
+        description: 'Built a scalable multi-branch inventory system with real-time stock tracking and role-based access. Developed efficient data tables with pagination, filtering, and sorting, and maintained a clean, structured Angular architecture.',
+        image: 'img/clothigo.png',
+        technologies: ['Angular', 'Nest JS', 'MongoDB', 'CSS'],
+        category: 'web',
+        github: '',
+        demo: 'https://www.clothigo.com/'
+    },
+
+        {
+        id: 1,
+        title: 'TrustPoint Pharma',
+        description: 'Developed a full-stack pharma eCommerce platform with secure payments, real-time notifications, and automated reports. Implemented JWT authentication, multi-role access, and background job processing for smooth operations.',
+        image: 'img/trust.png',
+        technologies: ['Angular', 'Nest JS', 'MongoDB', 'CSS'],
+        category: 'web',
+        github: '',
+        demo: 'https://www.trustpointpharma.com/'
+    },
+
+        {
+        id: 1,
+        title: 'Boi-poribar - Online Book Platform',
+        description: 'Created a cross-platform eCommerce and reading app using Angular and Capacitor. Built features like catalog, cart, and order tracking, and integrated EPUB/PDF reading with improved mobile performance and UX.',
+        image: 'img/boiparibar.png',
+        technologies: ['Angular', 'Nest JS', 'MongoDB', 'CSS'],
+        category: 'web',
+        github: '',
+        demo: 'https://www.boiporibar.com/'
+    },
+
+        {
+        id: 1,
+        title: 'Technique Publication',
+        description: 'A E-commerce platfrom for selling books',
+        image: 'img/tpl.png',
+        technologies: ['Angular', 'Nest JS', 'MongoDB', 'CSS'],
+        category: 'web',
+        github: '',
+        demo: 'https://www.tpl.com.bd/'
+    },
+        {
+        id: 1,
+        title: 'Artiland Pos',
+        description: 'A pos system for clothing brand',
+        image: 'img/artiland.png',
+        technologies: ['Angular', 'Nest JS', 'MongoDB', 'CSS'],
+        category: 'web',
+        github: '',
+        demo: 'https://adminpos.artiland.clothing/'
+    },
+    {
+        id: 2,
         title: 'Academic Thesis Portal',
         description: 'A web-based platform designed to manage the entire thesis process from student registration and supervisor selection to thesis submission, evaluation, and communication. It streamlines workflows for students, teachers, and administrators.',
-        image: 'project1.jpg',
+        // image: 'img/project1.jpg',
         technologies: ['React', 'Node JS', 'MongoDB', 'CSS'],
         category: 'web',
         github: 'https://github.com/tasminoni/Academic-Thesis-Portal',
         demo: 'https://academic-thesis-portal.vercel.app/'
     },
     {
-        id: 2,
+        id: 3,
         title: 'Neighbor Management System',
-        description: 'A comprehensive web application for managing neighborhood communities .',
-        image: 'project1.jpg',
+        description: 'A comprehensive web application for managing neighborhood communities.',
+        // image: 'img/project1.jpg',
         technologies: ['Java', 'Spring Boot', 'HTML', 'CSS', 'MySQL'],
         category: 'web',
         github: 'https://github.com/tasminoni/Neighbor-Management-System',
         demo: 'notdeployed.html'
     },
     {
-        id: 3,
+        id: 4,
         title: 'To Let Management System',
         description: 'A web application for managing to-let for house rent',
-        image: 'project2.jpg',
+        // image: 'img/project2.jpg',
         technologies: ['PHP', 'HTML', 'CSS', 'MySQL'],
         category: 'web',
         github: 'https://github.com/tasminoni/To-Let-Management-System',
         demo: 'notdeployed.html'
     },
     {
-        id: 4,
+        id: 5,
         title: 'Whatsapp Clone',
         description: 'A web application for managing whatsapp messages',
-        image: 'project2.jpg',
+        // image: 'img/project2.jpg',
         technologies: ['React', 'Node JS', 'MongoDB', 'CSS'],
         category: 'web',
         github: 'https://github.com/tasminoni/Whatsapp-Clone',
         demo: 'notdeployed.html'
     },
     {
-        id: 5,
+        id: 6,
         title: 'Secure User System',
         description: 'A secure user authentication and management system with robust security features.',
-        image: 'project2.jpg',
+        // image: 'img/project2.jpg',
         technologies: ['PHP', 'HTML', 'CSS', 'MySQL'],
         category: 'web',
         github: 'https://github.com/tasminoni/Secure-User-System',
         demo: 'notdeployed.html'
     },
-
     {
-        id: 6,
+        id: 7,
         title: '3D-Tower-Defense-Game',
         description: '3D Tower Defense Game with openGL',
-        image: 'project5.jpg',
+        // image: 'img/project5.jpg',
         technologies: ['OpenGl'],
         category: 'Game',
         github: 'https://github.com/tasminoni/3D-Tower-Defense-Game',
         demo: 'notdeployed.html'
     },
-
     {
-        id: 7,
+        id: 8,
         title: 'Weather-type-prediction',
         description: 'ML model to predict weather type',
-        image: 'project5.jpg',
+        // image: 'img/project5.jpg',
         technologies: ['ML', 'Python'],
         category: 'ml/ai',
         github: 'https://github.com/tasminoni/Weather-type-prediction',
         demo: 'notdeployed.html'
     },
     {
-        id: 8,
+        id: 9,
         title: 'Machine-Learning-Projects',
         description: 'ML projects',
-        image: 'project5.jpg',
+        // image: 'img/project5.jpg',
         technologies: ['ML', 'Python'],
         category: 'ml/ai',
         github: 'https://github.com/tasminoni/Machine-Learning-Projects',
         demo: 'notdeployed.html'
     },
     {
-        id: 9,
+        id: 10,
         title: 'RFID Based Automated Toll Collection System',
         description: 'EEE project',
-        image: 'project5.jpg',
+        // image: 'img/project5.jpg',
         technologies: ['Arduino', 'RFID', 'ESP32'],
         category: 'others',
         github: '',
         demo: 'https://www.youtube.com/watch?v=RaxV_tCrVXI'
     },
     {
-        id: 10,
+        id: 11,
         title: 'Smart Guardian Helmet',
         description: 'Computer interface course project',
-        image: 'project1.jpg',
+        // image: 'img/project1.jpg',
         technologies: ['C++', 'Arduino', 'Sensors', 'Wireless Communication'],
         category: 'others',
         github: 'https://github.com/tasminoni/Smart-Guardian-Helmet-An-Intelligent-Safety-System-for-Riders',
         demo: 'notdeployed.html'
     },
     {
-        id: 11,
+        id: 12,
         title: 'Shiritori Game',
         description: 'A simple Shiritori Game',
-        image: 'project1.jpg',
+        // image: 'img/project1.jpg',
         technologies: ['React','HTML','CSS'],
         category: 'Game',
         github: 'https://github.com/tasminoni/Shiritori-Game',
@@ -457,6 +508,15 @@ function loadProjects() {
     console.log('Projects loaded successfully');
 }
 
+function getCategoryIcon(category) {
+    switch(category.toLowerCase()) {
+        case 'web': return 'fa-laptop-code';
+        case 'game': return 'fa-gamepad';
+        case 'ml/ai': return 'fa-brain';
+        default: return 'fa-folder-open';
+    }
+}
+
 function createProjectCard(project) {
     const card = document.createElement('div');
     card.className = `project-card ${project.category}`;
@@ -472,9 +532,13 @@ function createProjectCard(project) {
         `<a href="${project.demo}" target="_blank" class="project-link" title="Live Demo">
             <i class="fas fa-external-link-alt"></i>
         </a>` : '';
+        
+    const categoryIcon = getCategoryIcon(project.category);
     
     card.innerHTML = `
         <div class="project-image">
+            ${project.image ? `<img src="${project.image}" alt="${project.title}" class="project-img">` : ''}
+            <i class="fas ${categoryIcon} project-category-icon"></i>
             <div class="project-overlay">
                 ${githubLink}
                 ${demoLink}
