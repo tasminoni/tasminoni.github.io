@@ -172,12 +172,9 @@ export default function ContactFooter() {
         </div>
 
         {/* Sub-Footer Meta */}
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-zinc-500">
+        <div className="mt-16 pt-8 border-t border-white/10 flex items-center justify-center text-center font-mono text-xs text-zinc-500">
           <div>
             &copy; {new Date().getFullYear()} TASMIN AHMED ONI. ALL RIGHTS RESERVED.
-          </div>
-          <div className="flex items-center gap-2">
-            <span>BUILT WITH REACT, TAILWIND CSS & FRAMER MOTION</span>
           </div>
         </div>
       </div>
