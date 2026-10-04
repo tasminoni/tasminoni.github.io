@@ -1,0 +1,46 @@
+You are an expert Frontend Developer, Creative Technologist, and 3D UI/UX Designer. Build a stunning, high-performance, fully responsive **Personal Portfolio Website** using **Pure HTML5, Modern CSS3, and Vanilla JavaScript**, powered by **Three.js** for 3D graphics and **GSAP (GreenSock Animation Platform) with ScrollTrigger** for scroll-driven animations.
+
+## 1. Tech Stack & CDN Setup
+Include the following libraries via CDN in the HTML `<head>`:
+* **Tailwind CSS (via CDN)** or custom modular CSS for rapid, modern styling with glassmorphism effects.
+* **Three.js** (latest stable CDN) for the 3D canvas and rendering.
+* **GSAP & ScrollTrigger Plugins** (latest stable CDN) for linking scroll movement to 3D camera/object animations and DOM fading.
+* **Lucide Icons** or FontAwesome for modern icons.
+* **Google Fonts** (e.g., 'Inter' or 'Poppins').
+
+---
+
+## 2. Core Layout & Single-Page Sections
+Create a sleek, modern single-page scrolling layout with a fixed or smooth-scrolling wrapper:
+1. **Hero Section:** Full-screen landing view with a striking 3D canvas background (e.g., interactive floating geometric shapes, particles, or an abstract 3D object), bold personal branding heading ("Hi, I'm [Your Name]"), a dynamic subtitle, and a "Scroll to Explore" indicator.
+2. **About Me:** A clean split-screen layout with your bio, core values, and stats on one side, and a modern glassmorphic card design on the other.
+3. **Projects Showcase:** A grid of interactive project cards featuring preview thumbnails, project descriptions, tech tags, and live/github links. Cards should tilt or react subtly to mouse hover.
+4. **Skills / Experience:** Visual grid or timeline highlighting technical proficiencies (Frontend, Backend, 3D/Tools) with animated progress/badges.
+5. **Contact Section:** A clean contact form with floating-label inputs, interactive buttons, and social media icons.
+
+---
+
+## 3. Detailed 3D & Scroll Behavior Mechanics (Vanilla JS + GSAP)
+This is the core requirement. Implement the interactive effects using Vanilla JavaScript and GSAP ScrollTrigger:
+* **Interactive 3D Canvas Background:** 
+  - Set up a full-screen Three.js WebGL renderer sitting behind the HTML content (`z-index: -1` or fixed position).
+  - Add responsive lighting (AmbientLight, DirectionalLight) and dynamic 3D meshes (e.g., torus knots, floating icosahedrons, or a particle field).
+* **Mouse Movement / Parallax Effect:**
+  - Listen to `mousemove` events across the window. Smoothly tilt, rotate, or shift the 3D objects or camera slightly based on normalized cursor coordinates (`clientX`, `clientY`) using linear interpolation (lerp) for buttery-smooth damping.
+* **Scroll-Driven 3D Choreography:**
+  - Use **GSAP ScrollTrigger** tied to window scrolling.
+  - As the user scrolls down through different page sections, animate the Three.js camera position (`camera.position.x/y/z`), rotation, or object scale so the 3D scene evolves dynamically with every section transition (e.g., Hero -> About -> Projects -> Contact).
+* **Performance & Responsiveness:**
+  - Handle window `resize` events correctly to update Three.js aspect ratio and renderer size.
+  - Cap the device pixel ratio (`renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))`) for mobile performance.
+  - Ensure 60 FPS performance.
+
+---
+
+## 4. Deliverables Expected
+Provide the complete, production-ready code in a single, well-structured layout or separated code blocks:
+1. **`index.html`** containing the HTML structure, CDN links, and custom styling.
+2. **`style.css`** for custom layout, glassmorphism styles, scrollbar styling, and responsive media queries.
+3. **`script.js`** containing the full Three.js scene initialization, geometry creation, mouse listener logic, and GSAP ScrollTrigger timelines.
+
+Write out the complete, clean code implementation now without missing functions or placeholder comments.

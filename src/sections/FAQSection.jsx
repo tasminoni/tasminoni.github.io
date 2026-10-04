@@ -12,11 +12,11 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faq" className="py-20 sm:py-28 bg-void border-b border-white/10 relative">
+    <section id="faq" className="scene-section py-20 sm:py-28 border-b border-white/10 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTracker
-          index="07"
-          total="08"
+          index="08"
+          total="09"
           tag="// FREQUENTLY ASKED QUESTIONS"
           title="FREQUENTLY ASKED QUESTIONS"
           subtitle="ABOUT MY BACKGROUND & WORK"

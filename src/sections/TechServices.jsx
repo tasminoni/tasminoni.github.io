@@ -21,11 +21,11 @@ export default function TechServices() {
   };
 
   return (
-    <section id="expertise" className="py-20 sm:py-28 bg-void border-b border-white/10 relative">
+    <section id="expertise" className="scene-section py-20 sm:py-28 border-b border-white/10 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTracker
-          index="02"
-          total="08"
+          index="03"
+          total="09"
           tag="// TECHNICAL EXPERTISE & ARSENAL"
           title="CORE EXPERTISE & TECH STACK"
           subtitle="WHAT I BUILD & SPECIALIZE IN"

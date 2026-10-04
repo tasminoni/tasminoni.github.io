@@ -6,11 +6,11 @@ import { experienceData, educationData } from '../data/portfolioData';
 
 export default function ExperienceMatrix({ onOpenCertificate }) {
   return (
-    <section id="experience" className="py-20 sm:py-28 bg-void border-b border-white/10 relative">
+    <section id="experience" className="scene-section py-20 sm:py-28 border-b border-white/10 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTracker
-          index="06"
-          total="08"
+          index="07"
+          total="09"
           tag="// TRACK RECORD // CAREER & EDUCATION"
           title="EXPERIENCE TIMELINE & ACADEMIC PEDIGREE"
           subtitle="COMMERCIAL PRACTICE & ENGINEERING FOUNDATION"

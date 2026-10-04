@@ -21,13 +21,14 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'EXPERTISE', href: '#expertise', index: '02' },
-    { name: 'WORKFLOW', href: '#workflow', index: '03' },
-    { name: 'PRINCIPLES', href: '#principles', index: '04' },
-    { name: 'PROJECTS', href: '#projects', index: '05' },
-    { name: 'EXPERIENCE', href: '#experience', index: '06' },
-    { name: 'FAQ', href: '#faq', index: '07' },
-    { name: 'CONTACT', href: '#contact', index: '08' },
+    { name: 'ABOUT', href: '#about', index: '02' },
+    { name: 'EXPERTISE', href: '#expertise', index: '03' },
+    { name: 'WORKFLOW', href: '#workflow', index: '04' },
+    { name: 'PRINCIPLES', href: '#principles', index: '05' },
+    { name: 'PROJECTS', href: '#projects', index: '06' },
+    { name: 'EXPERIENCE', href: '#experience', index: '07' },
+    { name: 'FAQ', href: '#faq', index: '08' },
+    { name: 'CONTACT', href: '#contact', index: '09' },
   ];
 
   return (
@@ -115,7 +116,7 @@ export default function Navbar() {
               <div className="space-y-6 pt-2">
                 <div className="font-mono text-xs text-crimson uppercase tracking-widest border-b border-white/10 pb-2 flex items-center justify-between">
                   <span>// PORTFOLIO DIRECTORY</span>
-                  <span className="text-zinc-500 font-mono text-[10px]">7 SECTIONS</span>
+                  <span className="text-zinc-500 font-mono text-[10px]">9 SECTIONS</span>
                 </div>
                 <div className="flex flex-col space-y-3">
                   {navLinks.map((link) => (
@@ -160,5 +161,4 @@ export default function Navbar() {
     </>
   );
 }
-
 

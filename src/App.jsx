@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import PageLoader from './components/PageLoader';
@@ -12,6 +12,9 @@ import FAQSection from './sections/FAQSection';
 import ContactFooter from './sections/ContactFooter';
 import ProjectModal from './components/ProjectModal';
 import CertificateModal from './components/CertificateModal';
+import AboutSection from './sections/AboutSection';
+
+const SceneBackground = lazy(() => import('./components/SceneBackground'));
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,6 +27,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-void text-paper selection:bg-crimson selection:text-white relative">
+      <Suspense fallback={null}><SceneBackground /></Suspense>
       {/* Theme-Matched Cyberpunk Initial Page Loader */}
       <AnimatePresence mode="wait">
         {isLoading && (
@@ -36,28 +40,31 @@ export default function App() {
 
       {/* Main Single-Page App Content */}
       <main>
-        {/* [ 01 / 08 ] Hero Section */}
+        {/* [ 01 / 09 ] Hero Section */}
         <HeroSection />
 
-        {/* [ 02 / 08 ] Capabilities & Tech Stack */}
+        {/* [ 02 / 09 ] About Me */}
+        <AboutSection />
+
+        {/* [ 03 / 09 ] Capabilities & Tech Stack */}
         <TechServices />
 
-        {/* [ 03 / 08 ] How I Work: The Sprint Protocol */}
+        {/* [ 04 / 09 ] How I Work: The Sprint Protocol */}
         <HowIWork />
 
-        {/* [ 04 / 08 ] The Code Rules: Manifesto */}
+        {/* [ 05 / 09 ] The Code Rules: Manifesto */}
         <CodeRules />
 
-        {/* [ 05 / 08 ] Featured Projects & Client Work */}
+        {/* [ 06 / 09 ] Featured Projects & Client Work */}
         <ProjectsSection onSelectProject={(project) => setSelectedProject(project)} />
 
-        {/* [ 06 / 08 ] Career & Education Matrix */}
+        {/* [ 07 / 09 ] Career & Education Matrix */}
         <ExperienceMatrix onOpenCertificate={handleOpenCertificate} />
 
-        {/* [ 07 / 08 ] FAQ Accordion */}
+        {/* [ 08 / 09 ] FAQ Accordion */}
         <FAQSection />
 
-        {/* [ 08 / 08 ] Massive CTA & Contact Footer */}
+        {/* [ 09 / 09 ] Massive CTA & Contact Footer */}
         <ContactFooter />
       </main>
 
@@ -78,4 +85,3 @@ export default function App() {
     </div>
   );
 }
-

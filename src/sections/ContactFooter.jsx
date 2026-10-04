@@ -6,6 +6,14 @@ import { personalInfo } from '../data/portfolioData';
 
 export default function ContactFooter() {
   const [copied, setCopied] = useState(false);
+  const [message, setMessage] = useState({ name: '', email: '', subject: '', body: '' });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const subject = encodeURIComponent(message.subject || `Portfolio enquiry from ${message.name}`);
+    const body = encodeURIComponent(`From: ${message.name} <${message.email}>\n\n${message.body}`);
+    window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
+  };
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(personalInfo.email);
@@ -18,14 +26,14 @@ export default function ContactFooter() {
   };
 
   return (
-    <footer id="contact" className="py-20 sm:py-28 bg-void relative overflow-hidden">
+    <footer id="contact" className="py-20 sm:py-28 scene-section relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-crimson/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionTracker
-          index="08"
-          total="08"
+          index="09"
+          total="09"
           tag="// GET IN TOUCH // CONTACT"
           title="LET'S CONNECT & TALK TECH."
           subtitle="COMMUNICATION CHANNELS"
@@ -79,6 +87,31 @@ export default function ContactFooter() {
               </a>
             </div>
           </div>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-10 my-14 items-start">
+          <div data-scene-reveal>
+            <div className="font-mono text-xs text-crimson tracking-widest mb-3">// START A CONVERSATION</div>
+            <h3 className="font-display text-3xl sm:text-4xl font-black uppercase mb-4">TELL ME ABOUT YOUR PROJECT.</h3>
+            <p className="text-zinc-400 leading-relaxed">Fill in the details and your email app will open with a message ready to send. You can also use the direct contact links below.</p>
+          </div>
+          <form onSubmit={handleSubmit} className="about-glass p-6 sm:p-8 grid gap-5" data-scene-reveal>
+            {[
+              { id: 'name', label: 'Your name', type: 'text', autoComplete: 'name' },
+              { id: 'email', label: 'Email address', type: 'email', autoComplete: 'email' },
+              { id: 'subject', label: 'Subject', type: 'text', autoComplete: 'off' },
+            ].map((field) => (
+              <div className="floating-field" key={field.id}>
+                <input id={`contact-${field.id}`} type={field.type} autoComplete={field.autoComplete} value={message[field.id]} onChange={(event) => setMessage({ ...message, [field.id]: event.target.value })} placeholder=" " required={field.id !== 'subject'} />
+                <label htmlFor={`contact-${field.id}`}>{field.label}</label>
+              </div>
+            ))}
+            <div className="floating-field">
+              <textarea id="contact-message" rows="5" value={message.body} onChange={(event) => setMessage({ ...message, body: event.target.value })} placeholder=" " required />
+              <label htmlFor="contact-message">Your message</label>
+            </div>
+            <button type="submit" className="inline-flex justify-center items-center gap-2 px-6 py-4 bg-crimson hover:bg-crimson-hover text-white font-mono text-sm font-bold uppercase tracking-wider transition-colors"><Send size={16} /> OPEN EMAIL APP</button>
+          </form>
         </div>
 
         {/* Contact Information Matrix */}

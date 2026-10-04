@@ -12,11 +12,11 @@ export default function CodeRules() {
   };
 
   return (
-    <section id="principles" className="py-20 sm:py-28 bg-void border-b border-white/10 relative">
+    <section id="principles" className="scene-section py-20 sm:py-28 border-b border-white/10 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTracker
-          index="04"
-          total="08"
+          index="05"
+          total="09"
           tag="// CODING PRINCIPLES // MANIFESTO"
           title="MY CODING PRINCIPLES & STANDARDS"
           subtitle="CORE ENGINEERING VALUES"

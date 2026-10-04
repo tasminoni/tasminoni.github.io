@@ -20,11 +20,11 @@ export default function ProjectsSection({ onSelectProject }) {
     : projectsData.filter(p => p.category === filter);
 
   return (
-    <section id="projects" className="py-20 sm:py-28 bg-void border-b border-white/10 relative">
+    <section id="projects" className="scene-section py-20 sm:py-28 border-b border-white/10 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTracker
-          index="05"
-          total="08"
+          index="06"
+          total="09"
           tag="// MY WORK // FEATURED PROJECTS"
           title="FEATURED PROJECTS & SYSTEM ARCHITECTURES"
           subtitle="APPLICATIONS I'VE BUILT & CONTRIBUTED TO"
@@ -62,7 +62,17 @@ export default function ProjectsSection({ onSelectProject }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className="bg-surface border border-white/10 hover:border-crimson transition-all duration-300 flex flex-col justify-between group overflow-hidden hover:shadow-[6px_6px_0px_#F44849]"
+                onPointerMove={(event) => {
+                  if (event.pointerType === 'touch') return;
+                  const bounds = event.currentTarget.getBoundingClientRect();
+                  event.currentTarget.style.setProperty('--tilt-x', `${((event.clientY - bounds.top) / bounds.height - 0.5) * -3}deg`);
+                  event.currentTarget.style.setProperty('--tilt-y', `${((event.clientX - bounds.left) / bounds.width - 0.5) * 3}deg`);
+                }}
+                onPointerLeave={(event) => {
+                  event.currentTarget.style.setProperty('--tilt-x', '0deg');
+                  event.currentTarget.style.setProperty('--tilt-y', '0deg');
+                }}
+                className="project-card bg-surface border border-white/10 hover:border-crimson transition-all duration-300 flex flex-col justify-between group overflow-hidden hover:shadow-[6px_6px_0px_#F44849]"
               >
                 <div>
                   {/* Project Image Banner or Visual Placeholder */}
@@ -71,7 +81,7 @@ export default function ProjectsSection({ onSelectProject }) {
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-cover object-top"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-80" />
                       

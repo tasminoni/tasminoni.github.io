@@ -41,16 +41,16 @@ export default function HeroSection() {
   }, [text, isDeleting, typingIndex]);
 
   return (
-    <section id="hero" className="relative pt-24 sm:pt-32 pb-16 overflow-hidden bg-void border-b border-white/10">
+    <section id="hero" className="scene-section relative min-h-screen pt-24 sm:pt-32 pb-16 overflow-hidden border-b border-white/10">
       {/* Background Subtle Grid */}
       <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-crimson/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header Meta Tracker [ 01 / 08 ] */}
+        {/* Section Header Meta Tracker [ 01 / 09 ] */}
         <div className="flex items-center justify-between font-mono text-xs sm:text-sm text-zinc-400 pb-4 mb-8 border-b border-white/10">
           <div className="flex items-center gap-2">
-            <span className="text-crimson font-bold">[ 01 / 08 ]</span>
+            <span className="text-crimson font-bold">[ 01 / 09 ]</span>
             <span className="text-zinc-600">/</span>
             <span className="text-zinc-300 font-mono tracking-widest">// PROFILE // PERSONAL PORTFOLIO</span>
           </div>
@@ -268,6 +268,11 @@ export default function HeroSection() {
           </motion.div>
         </div>
       </div>
+
+      <a href="#about" className="relative z-10 flex items-center justify-center gap-3 mt-12 font-mono text-xs text-zinc-400 hover:text-crimson transition-colors tracking-widest">
+        <span>SCROLL TO EXPLORE</span>
+        <ArrowDownRight size={16} />
+      </a>
 
       {/* Infinite Velocity Marquee Banner */}
       <div className="mt-16 sm:mt-20">
