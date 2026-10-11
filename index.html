@@ -11,6 +11,9 @@
         content="Tasmin Ahmed Oni is a software engineer in Dhaka, Bangladesh. Explore the portfolio, full-stack projects, backend development experience, and contact details." />
     <link rel="canonical" href="https://tasminoni.github.io/" />
 
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large" />
+
     <!-- Open Graph / Meta -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Tasmin Ahmed Oni" />
@@ -19,42 +22,85 @@
     <meta property="og:description"
         content="Explore Tasmin Ahmed Oni's software engineering projects, experience, and contact details." />
     <meta property="og:image" content="https://tasminoni.github.io/profilepic/oni.jpeg" />
+    <meta property="og:image:secure_url" content="https://tasminoni.github.io/profilepic/oni.jpeg" />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="Portrait of Tasmin Ahmed Oni" />
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Tasmin Ahmed Oni | Software Engineer Portfolio" />
     <meta name="twitter:description" content="Software engineering projects, experience, and contact details for Tasmin Ahmed Oni." />
     <meta name="twitter:image" content="https://tasminoni.github.io/profilepic/oni.jpeg" />
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
-            "@type": "Person",
-            "@id": "https://tasminoni.github.io/#person",
-            "name": "Tasmin Ahmed Oni",
-            "url": "https://tasminoni.github.io/",
-            "image": "https://tasminoni.github.io/profilepic/oni.jpeg",
-            "jobTitle": "Software Engineer",
-            "description": "Software engineer in Dhaka, Bangladesh specializing in full-stack web applications and backend development.",
-            "homeLocation": {
-                "@type": "Place",
-                "name": "Dhaka, Bangladesh"
-            },
-            "sameAs": [
-                "https://github.com/tasminoni",
-                "https://linkedin.com/in/tasmin-ahmed-oni-968a44255"
+            "@graph": [
+                {
+                    "@type": "WebSite",
+                    "@id": "https://tasminoni.github.io/#website",
+                    "url": "https://tasminoni.github.io/",
+                    "name": "Tasmin Ahmed Oni",
+                    "alternateName": [
+                        "Tasmin Oni",
+                        "Tasmin Ahmed",
+                        "tasminoni.github.io"
+                    ],
+                    "publisher": {
+                        "@id": "https://tasminoni.github.io/#person"
+                    }
+                },
+                {
+                    "@type": "ProfilePage",
+                    "@id": "https://tasminoni.github.io/#webpage",
+                    "url": "https://tasminoni.github.io/",
+                    "name": "Tasmin Ahmed Oni | Software Engineer Portfolio",
+                    "isPartOf": {
+                        "@id": "https://tasminoni.github.io/#website"
+                    },
+                    "primaryImageOfPage": {
+                        "@type": "ImageObject",
+                        "@id": "https://tasminoni.github.io/#primaryimage",
+                        "url": "https://tasminoni.github.io/profilepic/oni.jpeg",
+                        "contentUrl": "https://tasminoni.github.io/profilepic/oni.jpeg",
+                        "caption": "Tasmin Ahmed Oni"
+                    },
+                    "mainEntity": {
+                        "@id": "https://tasminoni.github.io/#person"
+                    }
+                },
+                {
+                    "@type": "Person",
+                    "@id": "https://tasminoni.github.io/#person",
+                    "name": "Tasmin Ahmed Oni",
+                    "url": "https://tasminoni.github.io/",
+                    "image": "https://tasminoni.github.io/profilepic/oni.jpeg",
+                    "jobTitle": "Software Engineer",
+                    "description": "Software engineer in Dhaka, Bangladesh specializing in full-stack web applications and backend development.",
+                    "homeLocation": {
+                        "@type": "Place",
+                        "name": "Dhaka, Bangladesh"
+                    },
+                    "sameAs": [
+                        "https://github.com/tasminoni",
+                        "https://linkedin.com/in/tasmin-ahmed-oni-968a44255"
+                    ]
+                }
             ]
         }
     </script>
 
+    <!-- Favicon & Icons for Google and Browsers -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#080808" />
+
     <!-- Fonts: Space Grotesk, Syne, JetBrains Mono, Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap"
         rel="stylesheet" />
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iMCIgZmlsbD0iIzA4MDgwOCIvPgo8cmVjdCB4PSIyIiB5PSIyIiB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHJ4PSIwIiBzdHJva2U9IiNGNDQ4NDkiIHN0cm9rZS13aWR0aD0iMiIvPgo8dGV4dCB4PSIxNiIgeT0iMjEiIGZvbnQtZmFtaWx5PSJzcGFjZSBncm90ZXNrLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iODAwIiBmaWxsPSIjRjRGMUVFIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5PPC90ZXh0Pgo8L3N2Zz4=" />
 </head>
 
 <body class="bg-void text-paper min-h-screen overflow-x-hidden font-sans">
