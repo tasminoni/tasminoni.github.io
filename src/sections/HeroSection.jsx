@@ -48,13 +48,13 @@ export default function HeroSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header Meta Tracker [ 01 / 09 ] */}
-        <div className="flex items-center justify-between font-mono text-xs sm:text-sm text-zinc-400 pb-4 mb-8 border-b border-white/10">
-          <div className="flex items-center gap-2">
+        <div className="flex items-start sm:items-center justify-between gap-2 font-mono text-[10px] sm:text-sm text-zinc-400 pb-4 mb-8 border-b border-white/10">
+          <div className="flex min-w-0 items-start sm:items-center gap-2">
             <span className="text-crimson font-bold">[ 01 / 09 ]</span>
             <span className="text-zinc-600">/</span>
-            <span className="text-zinc-300 font-mono tracking-widest">// PROFILE // PERSONAL PORTFOLIO</span>
+            <span className="text-zinc-300 font-mono tracking-wider sm:tracking-widest"><span className="sm:hidden">// PORTFOLIO</span><span className="hidden sm:inline">// PROFILE // PERSONAL PORTFOLIO</span></span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="hidden sm:flex items-center gap-2">
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             <span className="text-zinc-300 font-mono text-xs hidden sm:inline-block">OPEN TO OPPORTUNITIES</span>
           </div>
@@ -62,7 +62,7 @@ export default function HeroSection() {
 
         {/* Hero Main Headline Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          <div className="lg:col-span-8 space-y-6">
+          <div className="lg:col-span-8 space-y-6 min-w-0">
             {/* Top Identity Block with Round Profile Avatar */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -89,8 +89,8 @@ export default function HeroSection() {
               </div>
 
               {/* Status & Intro Details */}
-              <div className="space-y-2 font-mono">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-surface border border-white/15 text-xs text-zinc-200 rounded-full shadow-md">
+              <div className="space-y-2 font-mono min-w-0">
+                <div className="inline-flex max-w-full items-center gap-2 px-3.5 py-1.5 bg-surface border border-white/15 text-xs text-zinc-200 rounded-full shadow-md">
                   <span className="w-2 h-2 bg-crimson rounded-full animate-pulse shrink-0" />
                   <span className="text-xs font-semibold">SOFTWARE ENGINEER • UNITED GROUP (OSL)</span>
                 </div>
@@ -113,7 +113,7 @@ export default function HeroSection() {
               <div className="font-mono text-xs sm:text-sm text-crimson tracking-widest font-bold">
                 // HI, I AM
               </div>
-              <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase text-paper tracking-tighter leading-[0.95]">
+              <h1 className="font-display text-[clamp(1.8rem,8.6vw,3rem)] sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase text-paper tracking-tighter leading-[0.95]">
                 TASMIN <br />
                 <span className="text-stroke-2 hover:text-paper transition-colors duration-300">
                   AHMED ONI
@@ -122,10 +122,10 @@ export default function HeroSection() {
             </motion.div>
 
             {/* Dynamic Typing Subtitle */}
-            <div className="h-9 sm:h-10 flex items-center font-mono text-base sm:text-xl md:text-2xl text-zinc-200">
+            <div className="min-h-12 sm:min-h-10 flex items-start sm:items-center font-mono text-sm sm:text-xl md:text-2xl text-zinc-200 leading-snug">
               <span className="text-crimson mr-2 font-bold">›</span>
-              <span className="font-semibold">{text}</span>
-              <span className="w-2 h-5 bg-crimson ml-1 animate-pulse" />
+              <span className="font-semibold min-w-0">{text}</span>
+              <span className="w-2 h-5 bg-crimson ml-1 animate-pulse shrink-0" />
             </div>
 
             {/* Concise Bio */}
@@ -178,7 +178,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="lg:col-span-4 space-y-4"
+              className="lg:col-span-4 space-y-4 min-w-0"
           >
             {/* Terminal Window Card */}
             <div className="border border-white/15 bg-surface shadow-2xl overflow-hidden hover:border-crimson/50 transition-colors">
@@ -205,7 +205,7 @@ export default function HeroSection() {
               </div>
 
               {/* Code Snippet */}
-              <div className="p-5 font-mono text-xs leading-relaxed text-zinc-300 bg-surface/90 space-y-1">
+              <div className="p-4 sm:p-5 font-mono text-[11px] sm:text-xs leading-relaxed text-zinc-300 bg-surface/90 space-y-1 break-words">
                 <div className="text-zinc-500">// Personal Developer Profile</div>
                 <div>
                   <span className="text-crimson font-bold">const</span>{' '}
@@ -251,12 +251,12 @@ export default function HeroSection() {
               {personalInfo.stats.map((stat, idx) => (
                 <div
                   key={idx}
-                  className="p-3.5 border border-white/10 bg-surface/50 space-y-1 hover:border-crimson/50 transition-colors"
+                  className="p-3 sm:p-3.5 border border-white/10 bg-surface/50 space-y-1 min-w-0 hover:border-crimson/50 transition-colors"
                 >
                   <div className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest">
                     {stat.label}
                   </div>
-                  <div className="font-display text-xl sm:text-2xl font-extrabold text-paper">
+                  <div className="font-display text-lg sm:text-2xl font-extrabold text-paper break-words">
                     {stat.value}
                   </div>
                   <div className="font-mono text-[10px] text-crimson font-semibold">

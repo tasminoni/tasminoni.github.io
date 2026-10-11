@@ -59,7 +59,7 @@ export default function HowIWork() {
                   <div className="font-mono text-xs text-zinc-400">
                     {phase.subtitle}
                   </div>
-                  <h3 className="font-display text-xl sm:text-2xl font-extrabold text-paper uppercase tracking-tight group-hover:text-white transition-colors">
+                  <h3 className="font-display text-lg sm:text-2xl font-extrabold text-paper uppercase tracking-tight group-hover:text-white transition-colors [overflow-wrap:anywhere]">
                     {phase.title}
                   </h3>
                 </div>

@@ -20,6 +20,26 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setMobileMenuOpen(false);
+    };
+    const desktopBreakpoint = window.matchMedia('(min-width: 1280px)');
+    const closeOnDesktop = (event) => {
+      if (event.matches) setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    desktopBreakpoint.addEventListener('change', closeOnDesktop);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', closeOnEscape);
+      desktopBreakpoint.removeEventListener('change', closeOnDesktop);
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { name: 'ABOUT', href: '#about', index: '02' },
     { name: 'EXPERTISE', href: '#expertise', index: '03' },
@@ -36,24 +56,25 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-void/90 backdrop-blur-md border-b border-white/10 py-2.5 sm:py-3 shadow-2xl'
-            : 'bg-void/70 backdrop-blur-sm border-b border-white/5 py-3 sm:py-4'
+            ? 'bg-void/90 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl'
+            : 'bg-void/70 backdrop-blur-sm border-b border-white/5 py-3'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 w-full min-w-0">
           {/* Brand / Logo */}
           <a
             href="#hero"
-            className="flex items-center gap-2.5 group font-mono text-sm tracking-tight shrink-0"
+            className="flex items-center gap-2 sm:gap-2.5 group font-mono tracking-tight min-w-0 shrink-0"
           >
             <div className="w-2.5 h-2.5 bg-crimson group-hover:scale-125 transition-transform shrink-0" />
-            <span className="font-display font-black text-paper tracking-wider group-hover:text-crimson transition-colors whitespace-nowrap text-sm sm:text-base">
-              TASMIN AHMED ONI
+            <span className="font-display font-black text-paper tracking-wide group-hover:text-crimson transition-colors whitespace-nowrap text-xs sm:text-base">
+              <span className="sm:hidden">TASMIN ONI</span>
+              <span className="hidden sm:inline">TASMIN AHMED ONI</span>
             </span>
           </a>
 
           {/* Desktop Nav Links (lg screen and above) */}
-          <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
+          <nav className="hidden xl:flex items-center gap-5 xl:gap-7">
             {navLinks.slice(0, 5).map((link) => (
               <a
                 key={link.name}
@@ -84,7 +105,7 @@ export default function Navbar() {
             {/* Quick Contact CTA */}
             <a
               href="#contact"
-              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 bg-crimson hover:bg-crimson-hover text-white font-mono text-xs font-bold tracking-wider transition-all duration-200 shadow-[2px_2px_0px_rgba(255,255,255,0.2)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 shrink-0 whitespace-nowrap"
+              className="hidden md:inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 bg-crimson hover:bg-crimson-hover text-white font-mono text-xs font-bold tracking-wider transition-all duration-200 shadow-[2px_2px_0px_rgba(255,255,255,0.2)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 shrink-0 whitespace-nowrap"
             >
               <span>CONTACT</span>
               <ArrowUpRight size={14} className="shrink-0" />
@@ -93,8 +114,9 @@ export default function Navbar() {
             {/* Mobile / Tablet Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-1.5 sm:p-2 border border-white/20 text-paper hover:text-crimson hover:border-crimson transition-colors shrink-0"
-              aria-label="Toggle navigation menu"
+              className="xl:hidden w-11 h-11 inline-flex items-center justify-center border border-white/20 text-paper hover:text-crimson hover:border-crimson transition-colors shrink-0"
+              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
@@ -110,9 +132,9 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-[55px] sm:top-[60px] z-40 bg-void/98 backdrop-blur-xl border-b border-white/10 lg:hidden p-6 flex flex-col justify-between overflow-y-auto"
+            className="fixed inset-x-0 bottom-0 top-[68px] z-40 bg-void/98 backdrop-blur-xl border-b border-white/10 xl:hidden p-4 sm:p-6 flex flex-col justify-between overflow-y-auto"
           >
-            <div className="max-w-7xl mx-auto w-full flex flex-col justify-between h-full">
+            <div className="max-w-7xl mx-auto w-full flex flex-col justify-between min-h-full">
               <div className="space-y-6 pt-2">
                 <div className="font-mono text-xs text-crimson uppercase tracking-widest border-b border-white/10 pb-2 flex items-center justify-between">
                   <span>// PORTFOLIO DIRECTORY</span>

@@ -19,10 +19,10 @@ export default function SectionTracker({
         transition={{ duration: 0.5 }}
         className="flex flex-wrap items-center justify-between gap-4 font-mono text-xs sm:text-sm tracking-widest text-zinc-400 pb-3 border-b border-white/10"
       >
-        <div className="flex items-center gap-2">
+        <div className="flex min-w-0 items-start sm:items-center gap-2">
           <span className="text-crimson font-bold">[ {index} / {total} ]</span>
           <span className="text-zinc-600">/</span>
-          <span className="text-zinc-300 uppercase tracking-widest font-mono">{tag}</span>
+          <span className="text-zinc-300 uppercase tracking-wider sm:tracking-widest font-mono break-words">{tag}</span>
         </div>
         <div className="flex items-center gap-1.5 text-[11px] text-zinc-500 font-mono">
           <span className="w-1.5 h-1.5 bg-crimson rounded-full" />
@@ -37,14 +37,14 @@ export default function SectionTracker({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="lg:col-span-8"
+          className="lg:col-span-8 min-w-0"
         >
           {subtitle && (
             <div className="font-mono text-xs text-crimson font-semibold tracking-wider uppercase mb-2">
               {subtitle}
             </div>
           )}
-          <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-paper uppercase leading-[1.05]">
+          <h2 className="font-display text-[clamp(1.55rem,7.5vw,2rem)] sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-paper uppercase leading-[1.05] [overflow-wrap:anywhere]">
             {title}
           </h2>
         </motion.div>
@@ -55,7 +55,7 @@ export default function SectionTracker({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-4 lg:pt-2"
+            className="lg:col-span-4 lg:pt-2 min-w-0"
           >
             <p className="font-sans text-sm sm:text-base text-zinc-400 leading-relaxed">
               {description}

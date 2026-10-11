@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Github, Linkedin, FileDown, Copy, Check, ArrowUp, Send } from 'lucide-react';
 import SectionTracker from '../components/SectionTracker';
+import ScrollReveal from '../components/ScrollReveal';
 import { personalInfo } from '../data/portfolioData';
 
 export default function ContactFooter() {
@@ -41,46 +41,48 @@ export default function ContactFooter() {
         />
 
         {/* Giant Hero CTA Card */}
-        <div className="my-12 p-8 sm:p-14 bg-surface border border-white/15 relative overflow-hidden shadow-[8px_8px_0px_#F44849]">
-          <div className="space-y-6 max-w-3xl">
+        <div className="my-12 p-5 sm:p-14 bg-surface border border-white/15 relative overflow-hidden shadow-[4px_4px_0px_#F44849] sm:shadow-[8px_8px_0px_#F44849]">
+          <div className="space-y-6 max-w-3xl min-w-0">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-void border border-white/10 font-mono text-xs text-crimson font-bold">
               <span className="w-2 h-2 bg-crimson rounded-full animate-ping" />
               <span>DIRECT INBOX</span>
             </div>
 
-            <h3 className="font-display text-3xl sm:text-5xl md:text-6xl font-black uppercase text-paper tracking-tighter leading-none">
+            <ScrollReveal as="h3" className="font-display text-[clamp(1.7rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-black uppercase text-paper tracking-tighter leading-none [overflow-wrap:anywhere]">
               HAVE AN OPPORTUNITY? <br />
               <span className="text-stroke-2 hover:text-paper transition-colors">
                 LET'S TALK.
               </span>
-            </h3>
+            </ScrollReveal>
 
-            <p className="font-sans text-base sm:text-lg text-zinc-300">
+            <ScrollReveal as="p" delay={0.1} className="font-sans text-base sm:text-lg text-zinc-300">
               Whether you want to discuss a full-stack role, collaborate on an idea, or just say hi—my inbox is always open.
-            </p>
+            </ScrollReveal>
 
             {/* Copy Email & Quick Actions */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-4 pt-4">
               <button
                 onClick={handleCopyEmail}
-                className="inline-flex items-center gap-2 px-6 py-4 bg-crimson hover:bg-crimson-hover text-white font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all shadow-[4px_4px_0px_#FFFFFF] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-4 bg-crimson hover:bg-crimson-hover text-white font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-all shadow-[4px_4px_0px_#FFFFFF] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 min-w-0"
               >
                 {copied ? (
                   <>
                     <Check size={16} className="text-white" />
-                    <span>EMAIL COPIED TO CLIPBOARD!</span>
+                    <span className="sm:hidden">EMAIL COPIED</span>
+                    <span className="hidden sm:inline">EMAIL COPIED TO CLIPBOARD!</span>
                   </>
                 ) : (
                   <>
                     <Copy size={16} />
-                    <span>COPY EMAIL: {personalInfo.email}</span>
+                    <span className="sm:hidden">COPY EMAIL</span>
+                    <span className="hidden sm:inline">COPY EMAIL: {personalInfo.email}</span>
                   </>
                 )}
               </button>
 
               <a
                 href={personalInfo.socials.email}
-                className="inline-flex items-center gap-2 px-6 py-4 border border-white/20 hover:border-white bg-void text-paper hover:text-white font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-4 border border-white/20 hover:border-white bg-void text-paper hover:text-white font-mono text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors"
               >
                 <Send size={16} className="text-crimson" />
                 <span>SEND AN EMAIL</span>
@@ -90,12 +92,12 @@ export default function ContactFooter() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-10 my-14 items-start">
-          <div data-scene-reveal>
+          <ScrollReveal>
             <div className="font-mono text-xs text-crimson tracking-widest mb-3">// START A CONVERSATION</div>
             <h3 className="font-display text-3xl sm:text-4xl font-black uppercase mb-4">TELL ME ABOUT YOUR PROJECT.</h3>
             <p className="text-zinc-400 leading-relaxed">Fill in the details and your email app will open with a message ready to send. You can also use the direct contact links below.</p>
-          </div>
-          <form onSubmit={handleSubmit} className="about-glass p-6 sm:p-8 grid gap-5" data-scene-reveal>
+          </ScrollReveal>
+          <ScrollReveal as="form" onSubmit={handleSubmit} delay={0.12} className="about-glass p-4 sm:p-8 grid gap-5 min-w-0">
             {[
               { id: 'name', label: 'Your name', type: 'text', autoComplete: 'name' },
               { id: 'email', label: 'Email address', type: 'email', autoComplete: 'email' },
@@ -111,13 +113,13 @@ export default function ContactFooter() {
               <label htmlFor="contact-message">Your message</label>
             </div>
             <button type="submit" className="inline-flex justify-center items-center gap-2 px-6 py-4 bg-crimson hover:bg-crimson-hover text-white font-mono text-sm font-bold uppercase tracking-wider transition-colors"><Send size={16} /> OPEN EMAIL APP</button>
-          </form>
+          </ScrollReveal>
         </div>
 
         {/* Contact Information Matrix */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
           {/* Email Block */}
-          <div className="p-6 bg-surface border border-white/10 space-y-2">
+          <ScrollReveal className="p-4 sm:p-6 bg-surface border border-white/10 space-y-2 min-w-0">
             <div className="flex items-center gap-2 font-mono text-xs text-zinc-400 uppercase tracking-widest">
               <Mail size={14} className="text-crimson" />
               <span>EMAIL</span>
@@ -129,10 +131,10 @@ export default function ContactFooter() {
               {personalInfo.email}
             </a>
             <div className="font-mono text-[11px] text-zinc-500">PRIMARY CONTACT CHANNEL</div>
-          </div>
+          </ScrollReveal>
 
           {/* Phone Block */}
-          <div className="p-6 bg-surface border border-white/10 space-y-2">
+          <ScrollReveal delay={0.08} className="p-4 sm:p-6 bg-surface border border-white/10 space-y-2 min-w-0">
             <div className="flex items-center gap-2 font-mono text-xs text-zinc-400 uppercase tracking-widest">
               <Phone size={14} className="text-crimson" />
               <span>PHONE / WHATSAPP</span>
@@ -144,10 +146,10 @@ export default function ContactFooter() {
               {personalInfo.phone}
             </a>
             <div className="font-mono text-[11px] text-zinc-500">CALL & WHATSAPP</div>
-          </div>
+          </ScrollReveal>
 
           {/* Location Block */}
-          <div className="p-6 bg-surface border border-white/10 space-y-2">
+          <ScrollReveal delay={0.16} className="p-4 sm:p-6 bg-surface border border-white/10 space-y-2 min-w-0">
             <div className="flex items-center gap-2 font-mono text-xs text-zinc-400 uppercase tracking-widest">
               <MapPin size={14} className="text-crimson" />
               <span>LOCATION</span>
@@ -156,12 +158,12 @@ export default function ContactFooter() {
               Kuril, Dhaka, Bangladesh
             </div>
             <div className="font-mono text-[11px] text-zinc-500">AVAILABLE ON-SITE & REMOTE</div>
-          </div>
+          </ScrollReveal>
         </div>
 
         {/* Social Matrix & Resume Link */}
-        <div className="mt-8 p-6 bg-surface/50 border border-white/10 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-4">
+        <ScrollReveal className="mt-8 p-4 sm:p-6 bg-surface/50 border border-white/10 flex flex-wrap items-center justify-between gap-4 min-w-0">
+          <div className="flex flex-wrap items-center gap-4 min-w-0">
             <span className="font-mono text-xs text-zinc-500 uppercase tracking-widest">
               PROFILES & RESUME:
             </span>
@@ -202,7 +204,7 @@ export default function ContactFooter() {
             <span>BACK TO TOP</span>
             <ArrowUp size={14} />
           </button>
-        </div>
+        </ScrollReveal>
 
         {/* Sub-Footer Meta */}
         <div className="mt-16 pt-8 border-t border-white/10 flex items-center justify-center text-center font-mono text-xs text-zinc-500">

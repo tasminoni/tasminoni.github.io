@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 import SectionTracker from '../components/SectionTracker';
+import ScrollReveal from '../components/ScrollReveal';
 import { codeRules } from '../data/portfolioData';
 
 export default function CodeRules() {
@@ -45,12 +46,12 @@ export default function CodeRules() {
                   onClick={() => toggleRule(idx)}
                   className="w-full p-6 sm:p-7 flex items-center justify-between gap-4 text-left transition-colors"
                 >
-                  <div className="flex items-start sm:items-center gap-4 sm:gap-6">
-                    <span className="font-mono text-xl sm:text-2xl font-black text-crimson">
+                  <div className="flex min-w-0 flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6">
+                    <span className="font-mono text-base sm:text-2xl font-black text-crimson shrink-0">
                       RULE {rule.number}
                     </span>
-                    <div>
-                      <h3 className="font-display text-lg sm:text-2xl font-extrabold text-paper uppercase tracking-tight">
+                    <div className="min-w-0">
+                      <h3 className="font-display text-base sm:text-2xl font-extrabold text-paper uppercase tracking-tight [overflow-wrap:anywhere]">
                         {rule.rule}
                       </h3>
                       <div className="font-sans text-xs sm:text-sm text-zinc-400 mt-0.5">
@@ -87,14 +88,14 @@ export default function CodeRules() {
         </div>
 
         {/* Bottom Editorial Quote Banner */}
-        <div className="mt-12 p-6 sm:p-8 bg-surface border border-white/10 text-center space-y-2">
+        <ScrollReveal className="mt-12 p-6 sm:p-8 bg-surface border border-white/10 text-center space-y-2">
           <div className="font-mono text-xs text-zinc-500 uppercase tracking-widest">
             // DEVELOPER COMMITMENT
           </div>
-          <p className="font-display text-lg sm:text-2xl font-black text-paper uppercase max-w-3xl mx-auto">
+          <p className="font-display text-lg sm:text-2xl font-black text-paper uppercase max-w-3xl mx-auto [overflow-wrap:anywhere]">
             "WRITE CLEAN CODE TODAY THAT YOUR TEAM WILL APPRECIATE TOMORROW."
           </p>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

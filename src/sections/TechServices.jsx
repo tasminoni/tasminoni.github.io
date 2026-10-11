@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Code, Database, Server, ShoppingCart, Terminal, Shield } from 'lucide-react';
 import SectionTracker from '../components/SectionTracker';
+import ScrollReveal from '../components/ScrollReveal';
 import MarqueeText from '../components/MarqueeText';
 import { technicalExpertise, skillsData } from '../data/portfolioData';
 
@@ -55,12 +56,12 @@ export default function TechServices() {
                 </div>
 
                 {/* Title */}
-                <h3 className="font-display text-xl font-extrabold text-paper uppercase tracking-tight group-hover:text-white transition-colors">
+                <h3 className="font-display text-xl font-extrabold text-paper uppercase tracking-tight group-hover:text-white transition-colors [overflow-wrap:anywhere]">
                   {domain.title}
                 </h3>
 
                 {/* Description */}
-                <p className="font-sans text-sm text-zinc-400 leading-relaxed">
+                <p className="font-sans text-sm text-zinc-400 leading-relaxed [overflow-wrap:anywhere]">
                   {domain.description}
                 </p>
 
@@ -96,14 +97,14 @@ export default function TechServices() {
         {/* Deep Tech Arsenal Section Header */}
         <div className="pt-12 border-t border-white/10 mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
+            <ScrollReveal>
               <div className="font-mono text-xs text-crimson uppercase tracking-widest font-bold">
                 // COMPREHENSIVE SKILLS MATRIX
               </div>
-              <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-paper uppercase tracking-tight">
+              <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-paper uppercase tracking-tight [overflow-wrap:anywhere]">
                 PROGRAMMING LANGUAGES & TOOLING
               </h3>
-            </div>
+            </ScrollReveal>
 
             {/* Category Tabs */}
             <div className="flex flex-wrap gap-2">
@@ -111,7 +112,7 @@ export default function TechServices() {
                 <button
                   key={idx}
                   onClick={() => setActiveTab(idx)}
-                  className={`px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition-all ${
+                  className={`px-3 py-1.5 min-h-10 font-mono text-xs uppercase tracking-wider transition-all ${
                     activeTab === idx
                       ? 'bg-crimson text-white font-bold shadow-[2px_2px_0px_#FFFFFF]'
                       : 'bg-surface border border-white/15 text-zinc-400 hover:text-paper hover:border-white/30'
@@ -128,7 +129,8 @@ export default function TechServices() {
         <motion.div
           key={activeTab}
           initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.12 }}
           transition={{ duration: 0.3 }}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
         >

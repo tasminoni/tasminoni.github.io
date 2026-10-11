@@ -1,9 +1,5 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function SceneBackground() {
   const mountRef = useRef(null);
@@ -57,6 +53,31 @@ export default function SceneBackground() {
     renderer.setClearColor(0x000000, 0);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     mount.appendChild(renderer.domElement);
+
+    // Keep camera distance and object scale fixed so scrolling does not resize the 3D shape.
+    const sceneStops = [
+      ['#about', { x: -1.2, y: 0.5, rotation: 0.55 }],
+      ['#expertise', { x: 0.7, y: -0.4, rotation: 1.3 }],
+      ['#projects', { x: -0.9, y: 0.6, rotation: 2.1 }],
+      ['#experience', { x: 0.6, y: -0.3, rotation: 2.8 }],
+      ['#contact', { x: 0, y: 0, rotation: 3.6 }],
+    ].map(([selector, point]) => ({ element: document.querySelector(selector), point }))
+      .filter(({ element }) => element);
+    const target = { x: 0, y: 0, rotation: 0 };
+    const updateSceneTarget = () => {
+      const viewportHeight = window.innerHeight;
+      const next = { x: 0, y: 0, rotation: 0 };
+      sceneStops.forEach(({ element, point }) => {
+        const progress = Math.max(0, Math.min(1,
+          (viewportHeight * 0.85 - element.getBoundingClientRect().top) / (viewportHeight * 0.55)
+        ));
+        const eased = progress * progress * (3 - 2 * progress);
+        next.x += (point.x - next.x) * eased;
+        next.y += (point.y - next.y) * eased;
+        next.rotation += (point.rotation - next.rotation) * eased;
+      });
+      Object.assign(target, next);
+    };
     const resize = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
@@ -65,9 +86,14 @@ export default function SceneBackground() {
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       renderer.setSize(width, height, false);
       knot.position.x = orbit.position.x = width < 1024 ? 1.25 : 3.1;
+      updateSceneTarget();
     };
     resize();
     window.addEventListener('resize', resize);
+    window.addEventListener('scroll', updateSceneTarget, { passive: true });
+    camera.position.x = target.x;
+    camera.position.y = target.y;
+    rig.rotation.z = target.rotation;
 
     const pointer = { x: 0, y: 0 };
     const onPointerMove = (event) => {
@@ -76,30 +102,17 @@ export default function SceneBackground() {
     };
     window.addEventListener('pointermove', onPointerMove, { passive: true });
 
-    const ctx = gsap.context(() => {
-      const sections = [
-        ['#about', { x: -1.2, y: 0.5, z: 9.5, rotation: 0.55, scale: 0.82 }],
-        ['#expertise', { x: 0.7, y: -0.4, z: 11, rotation: 1.3, scale: 0.7 }],
-        ['#projects', { x: -0.9, y: 0.6, z: 9, rotation: 2.1, scale: 1.05 }],
-        ['#experience', { x: 0.6, y: -0.3, z: 10.5, rotation: 2.8, scale: 0.8 }],
-        ['#contact', { x: 0, y: 0, z: 9, rotation: 3.6, scale: 1.1 }],
-      ];
-      sections.forEach(([selector, target]) => {
-        gsap.to(camera.position, { x: target.x, y: target.y, z: target.z, ease: 'none', scrollTrigger: { trigger: selector, start: 'top bottom', end: 'top center', scrub: true } });
-        gsap.to(rig.rotation, { z: target.rotation, ease: 'none', scrollTrigger: { trigger: selector, start: 'top bottom', end: 'top center', scrub: true } });
-        gsap.to(rig.scale, { x: target.scale, y: target.scale, z: target.scale, ease: 'none', scrollTrigger: { trigger: selector, start: 'top bottom', end: 'top center', scrub: true } });
-      });
-      gsap.utils.toArray('[data-scene-reveal]').forEach((element) => {
-        gsap.fromTo(element, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.7, scrollTrigger: { trigger: element, start: 'top 88%', once: true } });
-      });
-    });
-
     let frame;
     const clock = new THREE.Clock();
     const render = () => {
       frame = window.requestAnimationFrame(render);
       if (document.hidden) return;
-      const elapsed = clock.getElapsedTime();
+      const delta = Math.min(clock.getDelta(), 0.05);
+      const elapsed = clock.elapsedTime;
+      const smoothing = 1 - Math.exp(-8 * delta);
+      camera.position.x += (target.x - camera.position.x) * smoothing;
+      camera.position.y += (target.y - camera.position.y) * smoothing;
+      rig.rotation.z += (target.rotation - rig.rotation.z) * smoothing;
       knot.rotation.x = elapsed * 0.11;
       knot.rotation.y = elapsed * 0.16;
       orbit.rotation.y = -elapsed * 0.06;
@@ -112,8 +125,8 @@ export default function SceneBackground() {
     return () => {
       window.cancelAnimationFrame(frame);
       window.removeEventListener('resize', resize);
+      window.removeEventListener('scroll', updateSceneTarget);
       window.removeEventListener('pointermove', onPointerMove);
-      ctx.revert();
       knot.geometry.dispose();
       orbit.geometry.dispose();
       particlesGeometry.dispose();

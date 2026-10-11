@@ -8,7 +8,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 md:p-10 overflow-y-auto">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -24,32 +24,32 @@ export default function ProjectModal({ project, isOpen, onClose }) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-4xl max-h-[90vh] bg-surface border border-white/20 shadow-2xl overflow-y-auto z-10 text-paper"
+            className="relative w-full max-w-4xl max-h-[calc(100dvh-1rem)] sm:max-h-[90vh] bg-surface border border-white/20 shadow-2xl overflow-y-auto overscroll-contain z-10 text-paper min-w-0"
           >
             {/* Modal Header Bar */}
-            <div className="sticky top-0 z-20 bg-surface/95 backdrop-blur-md border-b border-white/10 px-6 py-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
+            <div className="sticky top-0 z-20 bg-surface/95 backdrop-blur-md border-b border-white/10 px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+              <div className="flex min-w-0 items-center gap-3">
                 <span className="w-2.5 h-2.5 bg-crimson" />
-                <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">
+                <span className="font-mono text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-zinc-400 [overflow-wrap:anywhere]">
                   PROJECT DETAILS // [{project.category.toUpperCase()}]
                 </span>
               </div>
               <button
                 onClick={onClose}
-                className="p-1.5 border border-white/20 hover:border-crimson hover:text-crimson text-zinc-400 transition-colors"
+                className="w-11 h-11 inline-flex items-center justify-center border border-white/20 hover:border-crimson hover:text-crimson text-zinc-400 transition-colors shrink-0"
                 aria-label="Close modal"
               >
                 <X size={18} />
               </button>
             </div>
 
-            <div className="p-6 sm:p-8 space-y-8">
+            <div className="p-4 sm:p-8 space-y-6 sm:space-y-8 min-w-0">
               {/* Title & Subtitle */}
               <div>
                 <div className="font-mono text-xs text-crimson uppercase tracking-wider mb-1">
                   {project.subtitle}
                 </div>
-                <h2 className="font-display text-2xl sm:text-4xl font-extrabold text-paper uppercase tracking-tight">
+                <h2 className="font-display text-xl sm:text-4xl font-extrabold text-paper uppercase tracking-tight [overflow-wrap:anywhere]">
                   {project.title}
                 </h2>
               </div>
@@ -149,14 +149,14 @@ export default function ProjectModal({ project, isOpen, onClose }) {
               )}
 
               {/* Action Buttons */}
-              <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
-                <div className="flex flex-wrap items-center gap-3">
+              <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
                   {project.demo && (
                     <a
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-crimson hover:bg-crimson-hover text-white font-mono text-xs font-bold uppercase tracking-wider transition-colors shadow-[3px_3px_0px_rgba(255,255,255,0.2)]"
+                      className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 bg-crimson hover:bg-crimson-hover text-white font-mono text-xs font-bold uppercase tracking-wider transition-colors shadow-[3px_3px_0px_rgba(255,255,255,0.2)]"
                     >
                       <span>VIEW LIVE DEMO</span>
                       <ExternalLink size={14} />
@@ -167,7 +167,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 border border-white/20 hover:border-white bg-void text-paper hover:text-white font-mono text-xs font-bold uppercase tracking-wider transition-colors"
+                      className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 border border-white/20 hover:border-white bg-void text-paper hover:text-white font-mono text-xs font-bold uppercase tracking-wider transition-colors"
                     >
                       <Github size={14} />
                       <span>VIEW ON GITHUB</span>

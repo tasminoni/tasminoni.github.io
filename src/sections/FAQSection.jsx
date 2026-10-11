@@ -43,11 +43,11 @@ export default function FAQSection() {
                   onClick={() => toggleQuestion(idx)}
                   className="w-full p-6 text-left flex items-center justify-between gap-4 transition-colors"
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex min-w-0 items-start sm:items-center gap-3 sm:gap-4">
                     <span className="font-mono text-sm text-crimson font-bold">
                       [ Q{idx + 1 < 10 ? `0${idx + 1}` : idx + 1} ]
                     </span>
-                    <h3 className="font-display text-base sm:text-lg font-bold text-paper uppercase tracking-tight">
+                    <h3 className="font-display text-base sm:text-lg font-bold text-paper uppercase tracking-tight min-w-0 [overflow-wrap:anywhere]">
                       {faq.question}
                     </h3>
                   </div>
