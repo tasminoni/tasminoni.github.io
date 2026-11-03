@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ExternalLink, Github, Layers, CheckCircle2, Zap, Server, ShieldCheck } from 'lucide-react';
+import ScrambleText from './ScrambleText';
 
 export default function ProjectModal({ project, isOpen, onClose }) {
   if (!project) return null;
@@ -49,9 +50,12 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                 <div className="font-mono text-xs text-crimson uppercase tracking-wider mb-1">
                   {project.subtitle}
                 </div>
-                <h2 className="font-display text-xl sm:text-4xl font-extrabold text-paper uppercase tracking-tight [overflow-wrap:anywhere]">
+                <ScrambleText
+                  as="h2"
+                  className="font-display text-xl sm:text-4xl font-extrabold text-paper uppercase tracking-tight [overflow-wrap:anywhere]"
+                >
                   {project.title}
-                </h2>
+                </ScrambleText>
               </div>
 
               {/* Project Image Banner if available */}

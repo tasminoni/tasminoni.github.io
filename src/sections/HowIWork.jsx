@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Compass, Cpu, Gauge, Rocket, ArrowRight } from 'lucide-react';
 import SectionTracker from '../components/SectionTracker';
+import ScrambleText from '../components/ScrambleText';
 import { sprintPhases } from '../data/portfolioData';
 
 export default function HowIWork() {
@@ -59,9 +60,13 @@ export default function HowIWork() {
                   <div className="font-mono text-xs text-zinc-400">
                     {phase.subtitle}
                   </div>
-                  <h3 className="font-display text-lg sm:text-2xl font-extrabold text-paper uppercase tracking-tight group-hover:text-white transition-colors [overflow-wrap:anywhere]">
+                  <ScrambleText
+                    as="h3"
+                    duration={550}
+                    className="font-display text-lg sm:text-2xl font-extrabold text-paper uppercase tracking-tight group-hover:text-white transition-colors [overflow-wrap:anywhere]"
+                  >
                     {phase.title}
-                  </h3>
+                  </ScrambleText>
                 </div>
 
                 {/* Description */}
@@ -104,9 +109,12 @@ export default function HowIWork() {
             <div className="font-mono text-xs text-crimson font-bold uppercase tracking-widest">
               // ENGINEERING STANDARD
             </div>
-            <div className="font-display text-xl sm:text-2xl font-black text-paper uppercase">
+            <ScrambleText
+              as="div"
+              className="font-display text-xl sm:text-2xl font-black text-paper uppercase"
+            >
               WRITE CODE THAT IS ROBUST, READABLE, AND BUILT TO SCALE.
-            </div>
+            </ScrambleText>
           </div>
 
           <a

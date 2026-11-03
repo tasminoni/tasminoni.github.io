@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Github, ArrowRight, Server } from 'lucide-react';
 import SectionTracker from '../components/SectionTracker';
+import ScrambleText from '../components/ScrambleText';
 import { projectsData } from '../data/portfolioData';
 
 export default function ProjectsSection({ onSelectProject }) {
@@ -116,9 +117,13 @@ export default function ProjectsSection({ onSelectProject }) {
                       <div className="font-mono text-xs text-zinc-400 uppercase tracking-wider mb-1">
                         {project.subtitle}
                       </div>
-                      <h3 className="font-display text-xl sm:text-2xl font-extrabold text-paper uppercase tracking-tight group-hover:text-crimson transition-colors [overflow-wrap:anywhere]">
+                      <ScrambleText
+                        as="h3"
+                        duration={550}
+                        className="font-display text-xl sm:text-2xl font-extrabold text-paper uppercase tracking-tight group-hover:text-crimson transition-colors [overflow-wrap:anywhere]"
+                      >
                         {project.title}
-                      </h3>
+                      </ScrambleText>
                     </div>
 
                     {/* Brief Problem / Solution */}
@@ -186,9 +191,12 @@ export default function ProjectsSection({ onSelectProject }) {
             <div className="font-mono text-xs text-crimson uppercase tracking-widest font-bold">
               // GITHUB REPOSITORIES
             </div>
-            <div className="font-display text-xl sm:text-2xl font-black text-paper uppercase">
+            <ScrambleText
+              as="div"
+              className="font-display text-xl sm:text-2xl font-black text-paper uppercase"
+            >
               CHECK OUT MY CODE REPOSITORIES ON GITHUB
-            </div>
+            </ScrambleText>
           </div>
 
           <a

@@ -1,5 +1,6 @@
 import { personalInfo } from '../data/portfolioData';
 import ScrollReveal from '../components/ScrollReveal';
+import ScrambleText from '../components/ScrambleText';
 
 export default function AboutSection() {
   return (
@@ -8,7 +9,14 @@ export default function AboutSection() {
         <div className="font-mono text-xs tracking-widest text-crimson mb-10">[ 02 / 09 ] // ABOUT ME</div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
           <div className="min-w-0">
-            <ScrollReveal as="h2" className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight leading-none mb-8 [overflow-wrap:anywhere]">ENGINEERING WITH <span className="text-crimson">PURPOSE.</span></ScrollReveal>
+            <ScrollReveal>
+              <ScrambleText
+                as="h2"
+                className="font-display text-3xl sm:text-5xl font-black uppercase tracking-tight leading-none mb-8 [overflow-wrap:anywhere]"
+              >
+                ENGINEERING WITH <span className="text-crimson">PURPOSE.</span>
+              </ScrambleText>
+            </ScrollReveal>
             <ScrollReveal as="p" delay={0.08} className="text-zinc-200 text-lg leading-relaxed mb-5">{personalInfo.bio}</ScrollReveal>
             <ScrollReveal as="p" delay={0.16} className="text-zinc-400 leading-relaxed">Based in Dhaka, I work across interfaces, APIs, and business applications. I value clear architecture, reliable delivery, and software that solves real problems for the people using it.</ScrollReveal>
             <a href="#projects" className="inline-flex mt-8 font-mono text-sm font-bold text-crimson hover:text-paper transition-colors">EXPLORE SELECTED WORK ↗</a>

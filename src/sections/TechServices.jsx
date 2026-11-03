@@ -4,6 +4,7 @@ import { Code, Database, Server, ShoppingCart, Terminal, Shield } from 'lucide-r
 import SectionTracker from '../components/SectionTracker';
 import ScrollReveal from '../components/ScrollReveal';
 import MarqueeText from '../components/MarqueeText';
+import ScrambleText from '../components/ScrambleText';
 import { technicalExpertise, skillsData } from '../data/portfolioData';
 
 export default function TechServices() {
@@ -56,9 +57,13 @@ export default function TechServices() {
                 </div>
 
                 {/* Title */}
-                <h3 className="font-display text-xl font-extrabold text-paper uppercase tracking-tight group-hover:text-white transition-colors [overflow-wrap:anywhere]">
+                <ScrambleText
+                  as="h3"
+                  duration={550}
+                  className="font-display text-xl font-extrabold text-paper uppercase tracking-tight group-hover:text-white transition-colors [overflow-wrap:anywhere]"
+                >
                   {domain.title}
-                </h3>
+                </ScrambleText>
 
                 {/* Description */}
                 <p className="font-sans text-sm text-zinc-400 leading-relaxed [overflow-wrap:anywhere]">
@@ -101,9 +106,12 @@ export default function TechServices() {
               <div className="font-mono text-xs text-crimson uppercase tracking-widest font-bold">
                 // COMPREHENSIVE SKILLS MATRIX
               </div>
-              <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-paper uppercase tracking-tight [overflow-wrap:anywhere]">
+              <ScrambleText
+                as="h3"
+                className="font-display text-2xl sm:text-3xl font-extrabold text-paper uppercase tracking-tight [overflow-wrap:anywhere]"
+              >
                 PROGRAMMING LANGUAGES & TOOLING
-              </h3>
+              </ScrambleText>
             </ScrollReveal>
 
             {/* Category Tabs */}

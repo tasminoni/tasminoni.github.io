@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Github, Linkedin, FileDown, Copy, Check, ArrowUp, Send } from 'lucide-react';
 import SectionTracker from '../components/SectionTracker';
 import ScrollReveal from '../components/ScrollReveal';
+import ScrambleText from '../components/ScrambleText';
 import { personalInfo } from '../data/portfolioData';
 
 export default function ContactFooter() {
@@ -48,11 +49,16 @@ export default function ContactFooter() {
               <span>DIRECT INBOX</span>
             </div>
 
-            <ScrollReveal as="h3" className="font-display text-[clamp(1.7rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-black uppercase text-paper tracking-tighter leading-none [overflow-wrap:anywhere]">
-              HAVE AN OPPORTUNITY? <br />
-              <span className="text-stroke-2 hover:text-paper transition-colors">
-                LET'S TALK.
-              </span>
+            <ScrollReveal>
+              <ScrambleText
+                as="h3"
+                className="font-display text-[clamp(1.7rem,8vw,2.25rem)] sm:text-5xl md:text-6xl font-black uppercase text-paper tracking-tighter leading-none [overflow-wrap:anywhere]"
+              >
+                HAVE AN OPPORTUNITY? <br />
+                <span className="text-stroke-2 hover:text-paper transition-colors">
+                  LET'S TALK.
+                </span>
+              </ScrambleText>
             </ScrollReveal>
 
             <ScrollReveal as="p" delay={0.1} className="font-sans text-base sm:text-lg text-zinc-300">
@@ -94,7 +100,12 @@ export default function ContactFooter() {
         <div className="grid lg:grid-cols-2 gap-10 my-14 items-start">
           <ScrollReveal>
             <div className="font-mono text-xs text-crimson tracking-widest mb-3">// START A CONVERSATION</div>
-            <h3 className="font-display text-3xl sm:text-4xl font-black uppercase mb-4">TELL ME ABOUT YOUR PROJECT.</h3>
+            <ScrambleText
+              as="h3"
+              className="font-display text-3xl sm:text-4xl font-black uppercase mb-4"
+            >
+              TELL ME ABOUT YOUR PROJECT.
+            </ScrambleText>
             <p className="text-zinc-400 leading-relaxed">Fill in the details and your email app will open with a message ready to send. You can also use the direct contact links below.</p>
           </ScrollReveal>
           <ScrollReveal as="form" onSubmit={handleSubmit} delay={0.12} className="about-glass p-4 sm:p-8 grid gap-5 min-w-0">

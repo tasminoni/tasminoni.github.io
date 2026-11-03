@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 import SectionTracker from '../components/SectionTracker';
 import ScrollReveal from '../components/ScrollReveal';
+import ScrambleText from '../components/ScrambleText';
 import { codeRules } from '../data/portfolioData';
 
 export default function CodeRules() {
@@ -51,9 +52,13 @@ export default function CodeRules() {
                       RULE {rule.number}
                     </span>
                     <div className="min-w-0">
-                      <h3 className="font-display text-base sm:text-2xl font-extrabold text-paper uppercase tracking-tight [overflow-wrap:anywhere]">
+                      <ScrambleText
+                        as="h3"
+                        duration={550}
+                        className="font-display text-base sm:text-2xl font-extrabold text-paper uppercase tracking-tight [overflow-wrap:anywhere]"
+                      >
                         {rule.rule}
-                      </h3>
+                      </ScrambleText>
                       <div className="font-sans text-xs sm:text-sm text-zinc-400 mt-0.5">
                         {rule.summary}
                       </div>
@@ -92,9 +97,12 @@ export default function CodeRules() {
           <div className="font-mono text-xs text-zinc-500 uppercase tracking-widest">
             // DEVELOPER COMMITMENT
           </div>
-          <p className="font-display text-lg sm:text-2xl font-black text-paper uppercase max-w-3xl mx-auto [overflow-wrap:anywhere]">
+          <ScrambleText
+            as="p"
+            className="font-display text-lg sm:text-2xl font-black text-paper uppercase max-w-3xl mx-auto [overflow-wrap:anywhere]"
+          >
             "WRITE CLEAN CODE TODAY THAT YOUR TEAM WILL APPRECIATE TOMORROW."
-          </p>
+          </ScrambleText>
         </ScrollReveal>
       </div>
     </section>

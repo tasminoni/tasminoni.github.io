@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import ScrambleText from './ScrambleText';
 
 export default function SectionTracker({
   index = "01",
@@ -44,9 +45,12 @@ export default function SectionTracker({
               {subtitle}
             </div>
           )}
-          <h2 className="font-display text-[clamp(1.55rem,7.5vw,2rem)] sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-paper uppercase leading-[1.05] [overflow-wrap:anywhere]">
+          <ScrambleText
+            as="h2"
+            className="font-display text-[clamp(1.55rem,7.5vw,2rem)] sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-paper uppercase leading-[1.05] [overflow-wrap:anywhere]"
+          >
             {title}
-          </h2>
+          </ScrambleText>
         </motion.div>
 
         {description && (

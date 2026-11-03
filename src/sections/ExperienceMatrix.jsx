@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, GraduationCap, Award, ExternalLink, Calendar, MapPin } from 'lucide-react';
+import { Briefcase, GraduationCap, Award, MapPin } from 'lucide-react';
 import SectionTracker from '../components/SectionTracker';
 import ScrollReveal from '../components/ScrollReveal';
+import ScrambleText from '../components/ScrambleText';
 import { experienceData, educationData } from '../data/portfolioData';
 
 export default function ExperienceMatrix({ onOpenCertificate }) {
@@ -23,9 +24,12 @@ export default function ExperienceMatrix({ onOpenCertificate }) {
           <div className="lg:col-span-7 space-y-8">
             <ScrollReveal className="flex items-center gap-3 pb-3 border-b border-white/10">
               <Briefcase className="text-crimson" size={20} />
-              <h3 className="font-display text-xl font-extrabold text-paper uppercase tracking-tight">
+              <ScrambleText
+                as="h3"
+                className="font-display text-xl font-extrabold text-paper uppercase tracking-tight"
+              >
                 COMMERCIAL SOFTWARE ENGINEERING ROLES
-              </h3>
+              </ScrambleText>
             </ScrollReveal>
 
             <div className="space-y-6">
@@ -52,9 +56,13 @@ export default function ExperienceMatrix({ onOpenCertificate }) {
 
                   {/* Role Title & Company */}
                   <div className="mb-3">
-                    <h4 className="font-display text-lg sm:text-xl font-extrabold text-paper uppercase tracking-tight group-hover:text-crimson transition-colors [overflow-wrap:anywhere]">
+                    <ScrambleText
+                      as="h4"
+                      duration={550}
+                      className="font-display text-lg sm:text-xl font-extrabold text-paper uppercase tracking-tight group-hover:text-crimson transition-colors [overflow-wrap:anywhere]"
+                    >
                       {exp.role}
-                    </h4>
+                    </ScrambleText>
                     <div className="font-mono text-xs font-bold text-zinc-300 uppercase">
                       {exp.company}
                     </div>
@@ -97,9 +105,12 @@ export default function ExperienceMatrix({ onOpenCertificate }) {
           <div className="lg:col-span-5 space-y-8">
             <ScrollReveal className="flex items-center gap-3 pb-3 border-b border-white/10">
               <GraduationCap className="text-crimson" size={20} />
-              <h3 className="font-display text-xl font-extrabold text-paper uppercase tracking-tight">
+              <ScrambleText
+                as="h3"
+                className="font-display text-xl font-extrabold text-paper uppercase tracking-tight"
+              >
                 ACADEMIC CREDENTIALS
-              </h3>
+              </ScrambleText>
             </ScrollReveal>
 
             <div className="space-y-6">
@@ -119,9 +130,13 @@ export default function ExperienceMatrix({ onOpenCertificate }) {
                     </span>
                   </div>
 
-                  <h4 className="font-display text-base sm:text-lg font-extrabold text-paper uppercase tracking-tight group-hover:text-crimson transition-colors mb-1 [overflow-wrap:anywhere]">
+                  <ScrambleText
+                    as="h4"
+                    duration={550}
+                    className="font-display text-base sm:text-lg font-extrabold text-paper uppercase tracking-tight group-hover:text-crimson transition-colors mb-1 [overflow-wrap:anywhere]"
+                  >
                     {edu.degree}
-                  </h4>
+                  </ScrambleText>
                   <div className="font-mono text-xs text-zinc-300 font-bold uppercase mb-3">
                     {edu.institution}
                   </div>

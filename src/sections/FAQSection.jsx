@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 import SectionTracker from '../components/SectionTracker';
+import ScrambleText from '../components/ScrambleText';
 import { faqData } from '../data/portfolioData';
 
 export default function FAQSection() {
@@ -44,12 +45,16 @@ export default function FAQSection() {
                   className="w-full p-6 text-left flex items-center justify-between gap-4 transition-colors"
                 >
                   <div className="flex min-w-0 items-start sm:items-center gap-3 sm:gap-4">
-                    <span className="font-mono text-sm text-crimson font-bold">
+                    <span className="font-mono text-sm text-crimson font-bold shrink-0">
                       [ Q{idx + 1 < 10 ? `0${idx + 1}` : idx + 1} ]
                     </span>
-                    <h3 className="font-display text-base sm:text-lg font-bold text-paper uppercase tracking-tight min-w-0 [overflow-wrap:anywhere]">
+                    <ScrambleText
+                      as="h3"
+                      duration={550}
+                      className="font-display text-base sm:text-lg font-bold text-paper uppercase tracking-tight min-w-0 [overflow-wrap:anywhere]"
+                    >
                       {faq.question}
-                    </h3>
+                    </ScrambleText>
                   </div>
 
                   <div className="p-1.5 border border-white/10 bg-void flex-shrink-0 text-zinc-300">
