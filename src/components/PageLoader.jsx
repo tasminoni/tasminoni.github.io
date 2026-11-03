@@ -1,126 +1,120 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useLayoutEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import './PageLoader.css';
+
+import { paperFaces, createPaperDeformer, faceTransform } from './paperGeometry';
 
 export default function PageLoader({ onLoadingComplete }) {
-  const [progress, setProgress] = useState(0);
-  const [statusText, setStatusText] = useState('SYSTEM BOOT INITIALIZED...');
+  const root = useRef(null);
+  const complete = useRef(onLoadingComplete);
+  const finish = useRef(() => {});
+  complete.current = onLoadingComplete;
 
-  const statusLogs = [
-    'LOADING CORE MODULES...',
-    'MOUNTING COMPONENT TREE...',
-    'PARSING STACK ARTIFACTS...',
-    'CONFIGURING ARCHITECTURE MATRIX...',
-    'SYSTEM READY // INITIALIZING VIEW'
-  ];
-
-  useEffect(() => {
-    // Prevent body scroll during load
+  useLayoutEffect(() => {
+    const overlay = root.current;
+    const content = document.getElementById('home-content');
+    const previousOverflow = document.body.style.overflow;
+    const previousInert = content?.inert;
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let finished = false;
+    let timeline;
     document.body.style.overflow = 'hidden';
-
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            document.body.style.overflow = 'auto';
-            if (onLoadingComplete) onLoadingComplete();
-          }, 300);
-          return 100;
-        }
-
-        // Random step increment for realistic terminal boot feel
-        const diff = Math.floor(Math.random() * 18) + 6;
-        const next = Math.min(prev + diff, 100);
-
-        // Update status text based on progress
-        if (next < 25) setStatusText(statusLogs[0]);
-        else if (next < 50) setStatusText(statusLogs[1]);
-        else if (next < 75) setStatusText(statusLogs[2]);
-        else if (next < 95) setStatusText(statusLogs[3]);
-        else setStatusText(statusLogs[4]);
-
-        return next;
-      });
-    }, 70);
-
+    if (content) content.inert = true;
+    const unlock = () => {
+      document.body.style.overflow = previousOverflow;
+      if (content) content.inert = previousInert;
+    };
+    finish.current = () => {
+      if (finished) return;
+      finished = true;
+      timeline?.kill();
+      const hadFocus = overlay.contains(document.activeElement);
+      unlock();
+      if (hadFocus) content?.focus({ preventScroll: true });
+      complete.current?.();
+    };
+    const context = gsap.context(() => {
+      if (preference.matches) {
+        timeline = gsap.timeline({ onComplete: () => finish.current() })
+          .to(overlay, { opacity: 0, duration: 0.18 });
+        return;
+      }
+      const width = overlay.clientWidth;
+      const height = overlay.clientHeight;
+      const faces = gsap.utils.toArray('.paper-face');
+      const lights = faces.map((face) => face.firstElementChild);
+      const deform = createPaperDeformer(width, height);
+      const fold = { progress: 0 };
+      const draw = () => {
+        const points = deform(fold.progress);
+        faces.forEach((face, index) => {
+          const { matrix, shade } = faceTransform(points, paperFaces[index]);
+          face.style.transform = matrix;
+          lights[index].style.opacity = shade * Math.min(1, fold.progress * 4);
+        });
+      };
+      draw();
+      timeline = gsap.timeline({ onComplete: () => finish.current() });
+      timeline
+        .fromTo('.paper-line span', { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'sine.inOut' })
+        .to('.paper-copy', { opacity: 0, duration: 0.4, ease: 'sine.inOut' }, 0.65)
+        .to('.paper-sheet', {
+          rotationZ: -5, rotationX: 6, rotationY: -7,
+          duration: 1.2, ease: 'sine.inOut',
+        }, 0.8)
+        .to(fold, {
+          progress: 1, duration: 2.05, ease: 'sine.inOut', onUpdate: draw,
+        }, 0.8)
+        .to('.paper-shadow', { opacity: 0.48, scale: 1, duration: 1.8, ease: 'sine.inOut' }, 0.85)
+        .to('.paper-sheet', {
+          rotationZ: 14, rotationY: 12, y: -12,
+          duration: 1.15, ease: 'sine.inOut',
+        }, 2)
+        // A restrained release of tension before gravity takes over.
+        .to(fold, {
+          progress: 0.985, duration: 0.22, ease: 'sine.out', onUpdate: draw,
+        }, 2.85)
+        .to('.paper-sheet', {
+          x: width * 0.23, y: height * 0.7 + 180,
+          rotationZ: 105, rotationX: 55,
+          duration: 0.95, ease: 'power2.in',
+        }, 3.12)
+        .to('.paper-sheet', { opacity: 0, duration: 0.3, ease: 'sine.in' }, 3.77)
+        .to('.paper-shadow', { x: width * 0.12, opacity: 0, scale: 0.55, duration: 0.8 }, 3.12)
+        .to('.paper-skip', { opacity: 0, duration: 0.2 }, 3.8);
+    }, overlay);
+    const handleKey = (event) => { if (event.key === 'Escape') finish.current(); };
+    const handleMotion = () => { if (preference.matches) finish.current(); };
+    window.addEventListener('keydown', handleKey);
+    preference.addEventListener('change', handleMotion);
+    // A decorative intro must never leave navigation blocked.
+    const fallback = window.setTimeout(() => finish.current(), 6000);
     return () => {
-      clearInterval(interval);
-      document.body.style.overflow = 'auto';
+      window.clearTimeout(fallback);
+      window.removeEventListener('keydown', handleKey);
+      preference.removeEventListener('change', handleMotion);
+      context.revert();
+      unlock();
     };
   }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0, y: -40, transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] } }}
-      className="fixed inset-0 z-[100] bg-void flex flex-col justify-between p-6 sm:p-12 overflow-hidden select-none"
-    >
-      {/* Background Subtle Grid & Crimson Radial Glow */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-crimson/10 rounded-full blur-[120px] pointer-events-none" />
-
-      {/* Top Meta Bar */}
-      <div className="flex items-center justify-between font-mono text-xs text-zinc-500 relative z-10">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 bg-crimson animate-pulse" />
-          <span className="text-paper font-bold tracking-widest">BOOT // PROTOCOL</span>
+    <div ref={root} className="paper-loader" aria-label="Opening portfolio">
+      <span className="sr-only" role="status">Opening portfolio. Press Escape to skip the introduction.</span>
+      <div className="paper-shadow" aria-hidden="true" />
+      <div className="paper-sheet" aria-hidden="true">
+        {paperFaces.map((_, index) => (
+          <div key={index} className="paper-face" style={{
+            '--light-angle': `${index * 47}deg`,
+          }}><span className="paper-light" /></div>
+        ))}
+        <div className="paper-copy">
+          <div className="paper-meta"><span>ONI / PORTFOLIO</span><span>A NEW CHAPTER</span></div>
+          <div className="paper-title"><span className="paper-eyebrow">Ideas take shape.</span><h2>Let's unfold<br />something great<span>.</span></h2><div className="paper-line"><span /></div></div>
+          <div className="paper-meta"><span>SOFTWARE ENGINEER</span><span>WELCOME INSIDE ↗</span></div>
         </div>
-        {/* <div className="tracking-widest text-zinc-400">
-          v2.0.0 [REACT + TAILWIND]
-        </div> */}
       </div>
-
-      {/* Center Main Loader Block */}
-      <div className="max-w-xl mx-auto w-full space-y-6 relative z-10 my-auto">
-        {/* Brand Name */}
-        <div className="space-y-2">
-          {/* <div className="font-mono text-xs sm:text-sm text-crimson font-bold tracking-widest uppercase">
-            // TASMIN AHMED ONI
-          </div> */}
-          <div className="font-display text-2xl sm:text-4xl font-black text-paper tracking-wider">
-            Loading...
-          </div>
-        </div>
-
-        {/* Progress Counter & Terminal Status */}
-        <div className="space-y-2 pt-2">
-          <div className="flex items-end justify-between font-mono">
-            <span className="text-xs text-zinc-400 font-medium">
-              › {statusText}
-            </span>
-            <span className="text-2xl sm:text-3xl font-black text-crimson">
-              {progress < 10 ? `00${progress}` : progress < 100 ? `0${progress}` : progress}%
-            </span>
-          </div>
-
-          {/* Brutalist Progress Bar */}
-          <div className="w-full h-2 bg-surface border border-white/20 relative overflow-hidden p-0.5">
-            <motion.div
-              className="h-full bg-crimson shadow-[0_0_12px_#F44849]"
-              style={{ width: `${progress}%` }}
-              transition={{ ease: 'linear' }}
-            />
-          </div>
-        </div>
-
-        {/* Binary / Hex Tech Ticker */}
-        {/* <div className="flex items-center justify-between font-mono text-[10px] text-zinc-600 tracking-wider">
-          <span>0x7F // FULL_STACK</span>
-          <span>NEST • NODE • REACT • FLUTTER</span>
-          <span>[SYSTEM_OK]</span>
-        </div> */}
-      </div>
-
-      {/* Bottom Status Tracker */}
-      {/* <div className="flex items-center justify-between font-mono text-xs text-zinc-500 relative z-10 border-t border-white/10 pt-4">
-        <div className="text-[11px] text-zinc-400">
-          BRAC UNIVERSITY CSE • UNITED GROUP (OSL)
-        </div>
-      </div> */}
-      <div className="flex items-center gap-1.5 text-[11px] text-emerald-400">
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
-        <span>INITIALIZING</span>
-      </div>
-    </motion.div>
+      <button className="paper-skip" onClick={() => finish.current()}>Skip intro <span aria-hidden="true">↗</span></button>
+    </div>
   );
 }

@@ -1,5 +1,4 @@
 import React, { lazy, Suspense, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import PageLoader from './components/PageLoader';
 import HeroSection from './sections/HeroSection';
@@ -27,14 +26,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-void text-paper selection:bg-crimson selection:text-white relative">
-      <Suspense fallback={null}><SceneBackground /></Suspense>
-      {/* Theme-Matched Cyberpunk Initial Page Loader */}
-      <AnimatePresence mode="wait">
-        {isLoading && (
-          <PageLoader onLoadingComplete={() => setIsLoading(false)} />
-        )}
-      </AnimatePresence>
+      {!isLoading && <Suspense fallback={null}><SceneBackground /></Suspense>}
+      {isLoading && <PageLoader onLoadingComplete={() => setIsLoading(false)} />}
 
+      <div id="home-content" tabIndex={-1}>
       {/* Global Navbar */}
       <Navbar />
 
@@ -67,6 +62,7 @@ export default function App() {
         {/* [ 09 / 09 ] Massive CTA & Contact Footer */}
         <ContactFooter />
       </main>
+      </div>
 
       {/* System Inspection Modal for Deep Architecture Review */}
       <ProjectModal
