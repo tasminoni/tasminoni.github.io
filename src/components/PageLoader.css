@@ -26,8 +26,8 @@
   width: 100px;
   height: 100px;
   transform-origin: 0 0;
-  /* Tiny overlap covers antialiasing seams along shared edges. */
-  clip-path: polygon(-0.2% -0.2%, 100.4% -0.2%, -0.2% 100.4%);
+  /* Geometry overlaps all three shared edges to cover antialiasing seams. */
+  clip-path: polygon(0 0, 100% 0, 0 100%);
   background: var(--sheet-color);
   backface-visibility: visible;
   will-change: transform;
@@ -62,7 +62,7 @@
   padding: clamp(24px, 5vw, 72px);
   color: var(--sheet-ink);
   background:
-    radial-gradient(ellipse at 90% 12%, rgba(116, 116, 130, .09), transparent 58%),
+    radial-gradient(ellipse at 90% 12%, rgba(156, 44, 53, .11), transparent 58%),
     radial-gradient(ellipse at 6% 90%, rgba(0, 0, 0, .3), transparent 54%),
     linear-gradient(125deg, rgba(8, 8, 8, .36), transparent 65%);
   transform: translateZ(2px);
@@ -79,14 +79,14 @@
 .paper-title h2 { margin: 0; font-family: Georgia, serif; font-size: clamp(42px, 7.6vw, 112px); font-weight: 400; line-height: 1.02; letter-spacing: -.06em; }
 .paper-highlight {
   color: var(--sheet-silver);
-  background: linear-gradient(105deg, #f4f1ee 5%, #c5c5cc 52%, #898991 100%);
+  background: linear-gradient(105deg, #f4f1ee 5%, #c5c5cc 60%, #bc8588 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .paper-period { color: var(--sheet-accent); }
 .paper-line { width: 120px; height: 2px; margin-top: 36px; background: rgba(244, 241, 238, .16); }
-.paper-line span { display: block; height: 100%; background: linear-gradient(90deg, var(--sheet-silver), #696970); transform-origin: left; }
+.paper-line span { display: block; height: 100%; background: linear-gradient(90deg, #c16a70, #696970); transform-origin: left; }
 .paper-shadow {
   position: absolute;
   top: calc(50% + 100px);
@@ -114,6 +114,8 @@
 .paper-skip:hover { background: #242427; border-color: var(--sheet-silver); }
 .paper-skip:focus-visible { outline: 3px solid var(--sheet-accent); outline-offset: 4px; }
 @media (max-width: 600px) {
+  /* Separate the paper silhouette from the nearly black page underneath. */
+  .paper-loader { --sheet-color: #202023; }
   .paper-meta:last-child span:last-child { display: none; }
   .paper-meta { font-size: 9px; }
 }
@@ -128,7 +130,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #434348 40%, #8a8a93 65%, transparent);
+  background: linear-gradient(90deg, transparent, #713b41 40%, #8a8a93 65%, transparent);
 }
 .paper-meta:first-child > span:first-child { color: var(--sheet-ink); }
 .paper-meta:first-child > span:last-child {

@@ -28,6 +28,7 @@ for (let row = 0; row < ROWS; row++) {
 // Reuse point storage to avoid allocating arrays on every animation frame.
 export function createPaperDeformer(width, height) {
   const radius = Math.min(84, width * 0.19);
+  const portraitGather = Math.max(0, 1 - width / height) * 0.18;
   const vertices = paperVertices.map(({ u, v, wrinkle }) => {
     const longitude = (u - 0.5) * Math.PI * 1.92;
     const latitude = (v - 0.5) * Math.PI * 0.94;
@@ -48,9 +49,10 @@ export function createPaperDeformer(width, height) {
     for (let i = 0; i < vertices.length; i++) {
       const v = vertices[i];
       const p = progress + wave * v[6];
+      const py = p + Math.sin(p * Math.PI) * portraitGather;
       const point = points[i];
       point[0] = width / 2 + v[0] * (1 - p) + v[2] * p;
-      point[1] = height / 2 + v[1] * (1 - p) + v[3] * p;
+      point[1] = height / 2 + v[1] * (1 - py) + v[3] * py;
       point[2] = v[4] * p + Math.sin(p * Math.PI) * v[5];
     }
     return points;
@@ -63,10 +65,16 @@ export function faceTransform(points, indices) {
   const cx = c[0] - a[0], cy = c[1] - a[1], cz = c[2] - a[2];
   const nx = by * cz - bz * cy, ny = bz * cx - bx * cz, nz = bx * cy - by * cx;
   const length = Math.hypot(nx, ny, nz) || 1;
+  // Expand the painted triangle slightly about its centroid. Unlike extending
+  // clip-path outside the box, this also covers seams along the two straight edges.
+  const bleed = 1 + Math.min(0.025, 0.65 / Math.max(1, Math.min(Math.hypot(bx, by, bz), Math.hypot(cx, cy, cz))));
+  const offset = (bleed - 1) / 3;
   // Fixed upper-left softbox; both sides of the paper receive ambient light.
   const light = Math.abs((nx * -0.35 + ny * -0.45 + nz * 0.82) / length);
   return {
-    matrix: `matrix3d(${bx / 100},${by / 100},${bz / 100},0,${cx / 100},${cy / 100},${cz / 100},0,0,0,1,0,${a[0]},${a[1]},${a[2]},1)`,
+    // The third column must follow the face normal: a fixed Z basis becomes
+    // singular when a triangle turns edge-on (particularly visible on mobile).
+    matrix: `matrix3d(${bx * bleed / 100},${by * bleed / 100},${bz * bleed / 100},0,${cx * bleed / 100},${cy * bleed / 100},${cz * bleed / 100},0,${nx / length},${ny / length},${nz / length},0,${a[0] - (bx + cx) * offset},${a[1] - (by + cy) * offset},${a[2] - (bz + cz) * offset},1)`,
     shade: 0.08 + (1 - light) * 0.42,
   };
 }
