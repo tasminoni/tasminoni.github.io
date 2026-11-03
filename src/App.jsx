@@ -29,14 +29,14 @@ export default function App() {
       {!isLoading && <Suspense fallback={null}><SceneBackground /></Suspense>}
       {isLoading && <PageLoader onLoadingComplete={() => setIsLoading(false)} />}
 
-      <div id="home-content" tabIndex={-1}>
+      <div id="home-content" tabIndex={-1} data-intro-pending={isLoading}>
       {/* Global Navbar */}
-      <Navbar />
+      <Navbar ready={!isLoading} />
 
       {/* Main Single-Page App Content */}
       <main>
         {/* [ 01 / 09 ] Hero Section */}
-        <HeroSection />
+        <HeroSection ready={!isLoading} />
 
         {/* [ 02 / 09 ] About Me */}
         <AboutSection />

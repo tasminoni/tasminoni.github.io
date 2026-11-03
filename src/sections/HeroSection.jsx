@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowDownRight, Terminal, FileDown, ArrowRight } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 import MarqueeText from '../components/MarqueeText';
 
-export default function HeroSection() {
+export default function HeroSection({ ready = true }) {
+  const reduceMotion = useReducedMotion();
+  // Hold each group until the paper exits; only opacity and transforms animate.
+  const entrance = (delay, x = 0, y = 28) => ({
+    initial: { opacity: 0, x: reduceMotion ? 0 : x, y: reduceMotion ? 0 : y },
+    animate: ready
+      ? { opacity: 1, x: 0, y: 0 }
+      : { opacity: 0, x: reduceMotion ? 0 : x, y: reduceMotion ? 0 : y },
+    transition: { duration: reduceMotion ? 0 : 0.75, delay: ready && !reduceMotion ? delay : 0, ease: [0.22, 1, 0.36, 1] },
+  });
   const [typingIndex, setTypingIndex] = useState(0);
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -17,6 +26,7 @@ export default function HeroSection() {
   ];
 
   useEffect(() => {
+    if (!ready || reduceMotion) return;
     const current = titles[typingIndex];
     let timer;
 
@@ -32,13 +42,13 @@ export default function HeroSection() {
       timer = setTimeout(() => {
         setText(current.substring(0, text.length + 1));
         if (text.length === current.length) {
-          setTimeout(() => setIsDeleting(true), 2200);
+          timer = setTimeout(() => setIsDeleting(true), 2200);
         }
       }, 70);
     }
 
     return () => clearTimeout(timer);
-  }, [text, isDeleting, typingIndex]);
+  }, [text, isDeleting, typingIndex, ready, reduceMotion]);
 
   return (
     <section id="hero" className="scene-section relative min-h-screen pt-24 sm:pt-32 pb-16 overflow-hidden border-b border-white/10">
@@ -48,7 +58,7 @@ export default function HeroSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header Meta Tracker [ 01 / 09 ] */}
-        <div className="flex items-start sm:items-center justify-between gap-2 font-mono text-[10px] sm:text-sm text-zinc-400 pb-4 mb-8 border-b border-white/10">
+        <motion.div {...entrance(0.06, -20, 0)} className="flex items-start sm:items-center justify-between gap-2 font-mono text-[10px] sm:text-sm text-zinc-400 pb-4 mb-8 border-b border-white/10">
           <div className="flex min-w-0 items-start sm:items-center gap-2">
             <span className="text-crimson font-bold">[ 01 / 09 ]</span>
             <span className="text-zinc-600">/</span>
@@ -58,16 +68,14 @@ export default function HeroSection() {
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             <span className="text-zinc-300 font-mono text-xs hidden sm:inline-block">OPEN TO OPPORTUNITIES</span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Hero Main Headline Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           <div className="lg:col-span-8 space-y-6 min-w-0">
             {/* Top Identity Block with Round Profile Avatar */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              {...entrance(0.14, -28, 0)}
               className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6"
             >
               {/* Round Avatar - Crisp, Clear & Prominent */}
@@ -105,9 +113,7 @@ export default function HeroSection() {
 
             {/* Massive Typography Title */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
+              {...entrance(0.26, 0, 42)}
               className="space-y-1"
             >
               <div className="font-mono text-xs sm:text-sm text-crimson tracking-widest font-bold">
@@ -122,17 +128,15 @@ export default function HeroSection() {
             </motion.div>
 
             {/* Dynamic Typing Subtitle */}
-            <div className="min-h-12 sm:min-h-10 flex items-start sm:items-center font-mono text-sm sm:text-xl md:text-2xl text-zinc-200 leading-snug">
+            <motion.div {...entrance(0.38)} className="min-h-12 sm:min-h-10 flex items-start sm:items-center font-mono text-sm sm:text-xl md:text-2xl text-zinc-200 leading-snug">
               <span className="text-crimson mr-2 font-bold">›</span>
-              <span className="font-semibold min-w-0">{text}</span>
+              <span className="font-semibold min-w-0">{reduceMotion ? titles[0] : text}</span>
               <span className="w-2 h-5 bg-crimson ml-1 animate-pulse shrink-0" />
-            </div>
+            </motion.div>
 
             {/* Concise Bio */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
+              {...entrance(0.46)}
               className="font-sans text-base sm:text-lg text-zinc-400 max-w-2xl leading-relaxed"
             >
               Junior Software Engineer at <strong className="text-paper">United Group (Orange Solutions Ltd.)</strong> and Computer Science graduate from <strong className="text-paper">Brac University (CGPA 3.62)</strong>. I build reliable web applications, responsive interfaces, and scalable backend services.
@@ -140,9 +144,7 @@ export default function HeroSection() {
 
             {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
+              {...entrance(0.58, 0, 22)}
               className="flex flex-wrap items-center gap-4 pt-2"
             >
               <a
@@ -175,9 +177,7 @@ export default function HeroSection() {
 
           {/* Right Column: Interactive Terminal Preview & Profile Card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            {...entrance(0.32, 36, 12)}
               className="lg:col-span-4 space-y-4 min-w-0"
           >
             {/* Terminal Window Card */}
@@ -269,13 +269,13 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <a href="#about" className="relative z-10 flex items-center justify-center gap-3 mt-12 font-mono text-xs text-zinc-400 hover:text-crimson transition-colors tracking-widest">
+      <motion.a {...entrance(0.7, 0, 16)} href="#about" className="relative z-10 flex items-center justify-center gap-3 mt-12 font-mono text-xs text-zinc-400 hover:text-crimson transition-colors tracking-widest">
         <span>SCROLL TO EXPLORE</span>
         <ArrowDownRight size={16} />
-      </a>
+      </motion.a>
 
       {/* Infinite Velocity Marquee Banner */}
-      <div className="mt-16 sm:mt-20">
+      <motion.div {...entrance(0.78, 0, 20)} className="mt-16 sm:mt-20">
         <MarqueeText
           items={[
             "FULL-STACK SOFTWARE ENGINEER",
@@ -289,7 +289,7 @@ export default function HeroSection() {
           speed="normal"
           className="bg-surface/50 border-white/15"
         />
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Keep decorative CSS animations idle beneath the loading paper. */
+#home-content {
+  overflow-x: clip;
+}
+
+#home-content[data-intro-pending="true"] * {
+  animation-play-state: paused !important;
+}
+
 .scene-background {
   position: fixed;
   inset: 0;

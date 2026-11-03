@@ -110,7 +110,7 @@ export default function PageLoader({ onLoadingComplete }) {
         ))}
         <div className="paper-copy">
           <div className="paper-meta"><span>ONI / PORTFOLIO</span><span>A NEW CHAPTER</span></div>
-          <div className="paper-title"><span className="paper-eyebrow">Ideas take shape.</span><h2>Let's unfold<br />something great<span>.</span></h2><div className="paper-line"><span /></div></div>
+          <div className="paper-title"><span className="paper-eyebrow">Ideas take shape.</span><h2>Let's unfold<br /><span className="paper-highlight">something great</span><span className="paper-period">.</span></h2><div className="paper-line"><span /></div></div>
           <div className="paper-meta"><span>SOFTWARE ENGINEER</span><span>WELCOME INSIDE ↗</span></div>
         </div>
       </div>

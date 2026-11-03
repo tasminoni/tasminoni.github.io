@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { Menu, X, ArrowUpRight, FileDown } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
-export default function Navbar() {
+export default function Navbar({ ready = true }) {
+  const reduceMotion = useReducedMotion();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -53,7 +54,10 @@ export default function Navbar() {
 
   return (
     <>
-      <header
+      <motion.header
+        initial={{ opacity: 0, y: reduceMotion ? 0 : -18 }}
+        animate={{ opacity: ready ? 1 : 0, y: ready || reduceMotion ? 0 : -18 }}
+        transition={{ duration: reduceMotion ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
             ? 'bg-void/90 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl'
@@ -122,7 +126,7 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Mobile Drawer Menu */}
       <AnimatePresence>
